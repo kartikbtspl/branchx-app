@@ -1,4 +1,5 @@
 
+import Login from './components/form/Login'
 import Navbar from './components/header/Navbar'
 
 function App() {
@@ -7,9 +8,12 @@ function App() {
     <>
       <div>
         <Navbar />
-      </div>
+       </div>
+        <div>
+        <Login />
+       </div>
     </>
   )
 }
 
-export default App
+export default App;

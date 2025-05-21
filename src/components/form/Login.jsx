@@ -2,7 +2,7 @@ import React from 'react'
 
 const Login = () => {
   return (
-  <div className="min-h-screen bg-gradient-to-b from-[#13001f] to-[#0b0011] text-white px-8 py-16">
+  <div className="min-h-screen bg-gradient-to-r from-[#1a132e] to-[#0c033e] text-white px-8 py-16">
   <div className="max-w-screen-md mx-auto">
     <h2 className="text-4xl font-bold text-center text-green-500 ">Login</h2>
     <p className="text-center text-gray-300 mb-12 text-lg">

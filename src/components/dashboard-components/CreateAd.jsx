@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../ui/button/Button'
+import { Link } from 'react-router-dom'
 
 
 const CreateAd = () => {
@@ -10,7 +11,9 @@ const CreateAd = () => {
         <span>Create new Ad here</span>
       </div>
       <div className="w-full flex justify-end">
+      <Link to = "/advertisement/create-ad">
         <Button size="cs">Create Ad</Button>
+        </Link>
       </div>
     </div>
   )

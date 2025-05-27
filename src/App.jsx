@@ -18,6 +18,8 @@ import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
+import CreateAdForm from "./components/form/advertisement-form/CreateAdForm";
+import ViewAdvertisement from "./components/advertisement/ViewAdvertisement";
 
 export default function App() {
   return (
@@ -51,6 +53,12 @@ export default function App() {
             {/* Charts */}
             <Route path="/line-chart" element={<LineChart />} />
             <Route path="/bar-chart" element={<BarChart />} />
+
+        
+            <Route path="/advertisement/create-ad" element = {<CreateAdForm />} />
+            <Route path="/advertisement/view-ad" element = {<ViewAdvertisement />} />
+
+
           </Route>
 
           {/* Auth Layout */}

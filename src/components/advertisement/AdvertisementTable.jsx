@@ -29,25 +29,24 @@ const AdvertisementTable = () => {
 
   const handleStatusToggle = async (id) => {
     const updatedData = tableData.map((ad) =>
-      ad.id === id
-        ? { ...ad, status: ad.status === true ? "Inactive" : "Active" }
-        : ad
+      ad.id === id ? { ...ad, status: !ad.status } : ad
     );
     setTableData(updatedData);
 
     const updatedAd = updatedData.find((ad) => ad.id === id);
 
     try {
-        console.log("Updating status for ad:", updatedAd.status);
+      console.log("Updating status for ad:", updatedAd.status);
       const response = await axios.put(
         `https://6d22-203-192-220-137.ngrok-free.app/api/v1/campaign/${id}/status`,
         { status: updatedAd.status },
         { withCredentials: true }
       );
-        console.log(response.data);
-        toast.success(response.data.message)
+      console.log(response.data);
+      toast.success(response.data.message);
     } catch (error) {
       console.error("Failed to update status", error);
+      toast.error("Failed to update status");
     }
   };
 
@@ -90,29 +89,29 @@ const AdvertisementTable = () => {
                 <label className="relative inline-flex items-center cursor-pointer group">
                   <input
                     type="checkbox"
-                    checked={ad.status === "Active"}
+                    checked={ad.status}
                     onChange={() => handleStatusToggle(ad.id)}
                     className="sr-only peer"
                   />
                   <div
                     className={`w-16 h-9 rounded-full transition-colors duration-300 ease-in-out
-                    ${ad.status === "Active" ? "bg-green-500" : "bg-red-500"}
+                    ${ad.status ? "bg-green-500" : "bg-red-500"}
                     peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-offset-2
                     peer-focus:ring-green-400 relative shadow-md`}
                   >
                     <div
                       className={`absolute top-1 left-1 w-7 h-7 bg-white rounded-full shadow transform transition-transform duration-300 ease-in-out
-                      ${ad.status === "Active" ? "translate-x-7" : "translate-x-0"}`}
+                      ${ad.status ? "translate-x-7" : "translate-x-0"}`}
                     />
                   </div>
                   <span
                     className={`ml-3 text-sm font-semibold transition-colors duration-300 ${
-                      ad.status === "Active"
+                      ad.status
                         ? "text-green-700 dark:text-green-300"
                         : "text-red-700 dark:text-red-300"
                     }`}
                   >
-                    {ad.status}
+                    {ad.status ? "Active" : "Inactive"}
                   </span>
                 </label>
               </TableCell>
@@ -127,6 +126,7 @@ const AdvertisementTable = () => {
 export default AdvertisementTable;
 
 // import React, { useEffect, useState } from "react";
+// import axios from "axios";
 // import {
 //   Table,
 //   TableBody,
@@ -135,43 +135,43 @@ export default AdvertisementTable;
 //   TableRow,
 // } from "../ui/table";
 // import MediaPlayer from "../video/MediaPlayer";
-// import axios from "axios";
+// import { toast } from "react-toastify";
 
 // const AdvertisementTable = () => {
 //   const [tableData, setTableData] = useState([]);
 
 //   const getAdvertisements = async () => {
 //     try {
-//         const response = await axios.get("https://6d22-203-192-220-137.ngrok-free.app/api/v1/campaign/getCampaigns"
-//             , {withCredentials: true}
-//         )
-//         console.log(response.data);
-//         setTableData(response.data)
-//     }
-//     catch (error) {
+//       const response = await axios.get(
+//         "https://6d22-203-192-220-137.ngrok-free.app/api/v1/campaign/getCampaigns",
+//         { withCredentials: true }
+//       );
+//       console.log(response.data);
+//       setTableData(response.data);
+//     } catch (error) {
 //       console.error("Failed to fetch advertisements", error);
 //     }
-//   }
+//   };
 
 //   const handleStatusToggle = async (id) => {
 //     const updatedData = tableData.map((ad) =>
 //       ad.id === id
-//         ? {
-//             ...ad,
-//             status: ad.status === "Active" ? "Inactive" : "Active",
-//           }
+//         ? { ...ad, status: ad.status === "Active" ? "Inactive" : "Active" }
 //         : ad
 //     );
 //     setTableData(updatedData);
 
-    
-//     const ad = updatedData.find((item) => item.id === id);
+//     const updatedAd = updatedData.find((ad) => ad.id === id);
+
 //     try {
-//       await fetch(`/api/ads/${id}/status`, {
-//         method: "PUT",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ status: ad.status }),
-//       });
+//         console.log("Updating status for ad:", updatedAd.status);
+//       const response = await axios.put(
+//         `https://6d22-203-192-220-137.ngrok-free.app/api/v1/campaign/${id}/status`,
+//         { status: updatedAd.status },
+//         { withCredentials: true }
+//       );
+//         console.log(response.data);
+//         toast.success(response.data.message)
 //     } catch (error) {
 //       console.error("Failed to update status", error);
 //     }
@@ -179,8 +179,7 @@ export default AdvertisementTable;
 
 //   useEffect(() => {
 //     getAdvertisements();
-
-//   } , [])
+//   }, []);
 
 //   return (
 //     <div className="text-center">
@@ -202,7 +201,7 @@ export default AdvertisementTable;
 //           </TableRow>
 //         </TableHeader>
 //         <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
-//           { tableData?.map((ad) => (
+//           {tableData.map((ad) => (
 //             <TableRow key={ad.id}>
 //               <TableCell className="px-5 py-4 w-[30%] sm:px-6 text-start">
 //                 <MediaPlayer src={ad.creativeFile} />
@@ -223,14 +222,14 @@ export default AdvertisementTable;
 //                   />
 //                   <div
 //                     className={`w-16 h-9 rounded-full transition-colors duration-300 ease-in-out
-//         ${ad.status === "Active" ? "bg-green-500" : "bg-red-500"}
-//         peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-offset-2 peer-focus:ring-green-400
-//         relative shadow-md`}
+//                     ${ad.status === "Active" ? "bg-green-500" : "bg-red-500"}
+//                     peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-offset-2
+//                     peer-focus:ring-green-400 relative shadow-md`}
 //                   >
 //                     <div
 //                       className={`absolute top-1 left-1 w-7 h-7 bg-white rounded-full shadow transform transition-transform duration-300 ease-in-out
-//           ${ad.status === "Active" ? "translate-x-7" : "translate-x-0"}`}
-//                     ></div>
+//                       ${ad.status === "Active" ? "translate-x-7" : "translate-x-0"}`}
+//                     />
 //                   </div>
 //                   <span
 //                     className={`ml-3 text-sm font-semibold transition-colors duration-300 ${
@@ -252,4 +251,5 @@ export default AdvertisementTable;
 // };
 
 // export default AdvertisementTable;
+
 

@@ -18,6 +18,10 @@ import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
+import AdDetails from "./pages/Dashboard/AdDetails";
+import Login from "./components/form/Login";
+import ContactForm from "./components/others/ContactForm";
+// import ContactUs from "./pages/Others/ContactUs";
 import CreateAdForm from "./components/form/advertisement-form/CreateAdForm";
 import ViewAdvertisement from "./components/advertisement/ViewAdvertisement";
 import { ToastContainer } from 'react-toastify';
@@ -56,6 +60,8 @@ export default function App() {
             <Route path="/line-chart" element={<LineChart />} />
             <Route path="/bar-chart" element={<BarChart />} />
 
+          {/* Other Routes */}
+          <Route path="addetails" element={<AdDetails />} />
         
             <Route path="/advertisement/create-ad" element = {<CreateAdForm />} />
             <Route path="/advertisement/view-ad" element = {<ViewAdvertisement />} />
@@ -68,11 +74,14 @@ export default function App() {
           {/* Auth Layout */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/contact-us" element={<ContactForm/>} />
 
       
 
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />
+          <Route path="log" element={<Login />} />
+
         </Routes>
       </Router>
       <ToastContainer position="bottom-right" autoClose={3000} />

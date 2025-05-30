@@ -19,7 +19,7 @@ const NotificationPanel = () => {
         {notifications.map((note, index) => (
           <div key={index} className="flex items-start space-x-2">
             <span className="text-xl mt-1">
-              {note.type === "Notification" ? "😅" : "📌"}
+              {note.type === "Notification" ? "🤩" : "🔔"}
             </span>
             <div>
               <div className="text-sm font-medium text-gray-700">{note.type}</div>
@@ -30,8 +30,8 @@ const NotificationPanel = () => {
                     className={
                       note.status.toLowerCase().includes("rejected") ||
                       note.status.toLowerCase().includes("complain")
-                        ? "text-red-500 font-semibold ml-1"
-                        : "text-green-500 font-semibold ml-1"
+                        ? "text-red-500 ml-1"
+                        : "text-green-500 ml-1"
                     }
                   >
                     {note.status}.

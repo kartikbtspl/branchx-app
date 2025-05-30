@@ -1,12 +1,15 @@
 import EcommerceMetrics from "../../components/ecommerce/EcommerceMetrics";
 import MonthlySalesChart from "../../components/ecommerce/MonthlySalesChart";
-import StatisticsChart from "../../components/ecommerce/StatisticsChart";
+import StatisticsChart from "../../components/dashboard-components/AdSpendAnalytics";
 import MonthlyTarget from "../../components/ecommerce/MonthlyTarget";
 import RecentOrders from "../../components/ecommerce/RecentOrders";
 import DemographicCard from "../../components/ecommerce/DemographicCard";
 import PageMeta from "../../components/common/PageMeta";
 import CreateAd from "../../components/dashboard-components/CreateAd";
 import NotificationPanel from "../../components/dashboard-components/NotificationPanel";
+import VideoAdsCarousel from "../../components/dashboard-components/VideoAdsCarousel";
+import AdSpendsAnalytics from "../../components/dashboard-components/AdSpendAnalytics";
+import AdsListTable from "../../components/dashboard-components/AdsListTable";
 
 export default function Home() {
   return (
@@ -22,13 +25,13 @@ export default function Home() {
 
         <div className="col-span-12 xl:col-span-5">
           {/* <MonthlyTarget /> */}
-          
             <NotificationPanel/>
-         
         </div>
 
         <div className="col-span-12">
-          {/* <StatisticsChart /> */}
+          <VideoAdsCarousel />
+          <AdSpendsAnalytics />
+          <AdsListTable />
         </div>
 
         <div className="col-span-12 xl:col-span-5">

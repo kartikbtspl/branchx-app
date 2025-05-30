@@ -60,6 +60,7 @@ import {ReactComponent as Promotions} from './promotions.svg?react';
 import {ReactComponent as InventoryManagement} from './inventory-management.svg?react';
 import {ReactComponent as ReportsAI} from './reports-ai.svg?react';
 import {ReactComponent as LoyaltyPointsManagement} from './loyalty-points-management.svg?react';
+import {ReactComponent as SquarePen} from './square-pen.svg?react';
 
 export {
 
@@ -71,6 +72,7 @@ export {
   InventoryManagement,
   ReportsAI,
   LoyaltyPointsManagement,
+  SquarePen,
 
   ErrorHexaIcon,
   AlertHexaIcon,

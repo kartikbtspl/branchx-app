@@ -24,6 +24,8 @@ import ContactForm from "./components/others/ContactForm";
 // import ContactUs from "./pages/Others/ContactUs";
 import CreateAdForm from "./components/form/advertisement-form/CreateAdForm";
 import ViewAdvertisement from "./components/advertisement/ViewAdvertisement";
+import { ToastContainer } from 'react-toastify';
+import AdvertisementTable from "./components/advertisement/AdvertisementTable";
 
 export default function App() {
   return (
@@ -63,7 +65,9 @@ export default function App() {
         
             <Route path="/advertisement/create-ad" element = {<CreateAdForm />} />
             <Route path="/advertisement/view-ad" element = {<ViewAdvertisement />} />
+            <Route path="/created-advertisements" element = {<AdvertisementTable/> }  />
 
+                
 
           </Route>
 
@@ -72,12 +76,15 @@ export default function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/contact-us" element={<ContactForm/>} />
 
+      
+
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />
           <Route path="log" element={<Login />} />
 
         </Routes>
       </Router>
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </>
   );
 }

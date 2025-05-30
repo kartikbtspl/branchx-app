@@ -1,76 +1,340 @@
-import { MoveLeft, Search } from "lucide-react";
-import { Link } from "react-router";
-import Input from "../input/InputField";
-import TextArea from "../input/TextArea";
-import UploadMediaBox from "./UploadMediaBox";
-import InvestmentSliderWithReset from "./InvestmentSliderWithReset";
-import AdCirculationDateTimePicker from "../../common/AdCirculationDateTimePicker";
-
+import React from "react";
+import CampaignForm from "./CampaignForm";
+import UploadCreatives from "./UploadCreatives";
+import TargetingOptions from "./TargetingOptions";
+import AdScheduling from "./AdScheduling";
+import BiddingBudget from "./BiddingBudget";
+import { useForm, FormProvider } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const CreateAdForm = () => {
+  const navigate = useNavigate();
+  const methods = useForm();
+
+  const onSubmit = async (data) => {
+    console.log("Form data before sending:", data);
+    const formData = new FormData();
+
+    try {
+      Object.entries(data).forEach(([key, value]) => {
+        if (value instanceof File) {
+          formData.append(key, value);
+        } else if (value instanceof FileList) {
+          Array.from(value).forEach((file) => formData.append(key, file));
+        } else if (
+          value instanceof Date ||
+          (typeof value === "object" && value?.$d)
+        ) {
+          const isoDate = new Date(value.$d || value).toISOString();
+          formData.append(key, isoDate);
+        } else if (Array.isArray(value)) {
+          if (key === "targetRegions") {
+            const regionNames = value.map((region) => region.name);
+            formData.append(key, JSON.stringify(regionNames));
+          } else {
+            formData.append(key, JSON.stringify(value));
+          }
+        } else if (typeof value === "object") {
+          formData.append(key, JSON.stringify(value));
+        } else if (value !== undefined && value !== null) {
+          formData.append(key, value.toString());
+        }
+      });
+
+      for (let [key, val] of formData.entries()) {
+        console.log(`${key}:`, val);
+      }
+
+      const response = await axios.post(
+        "https://6d22-203-192-220-137.ngrok-free.app/api/v1/campaign/createCampaign",
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            
+          },
+        }
+      );
+
+      if (response.data.status === 200) {
+        toast.success("Campaign created successfully!");
+        methods.reset();
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error(
+        error.response?.data?.errors?.[0]?.message ||
+          error.response?.data?.message ||
+          "An error occurred while creating the campaign."
+      );
+    }
+  };
+
   return (
     <div>
-      <Link to="/">
-        <button>
-          <span className="flex gap-2">
-            <MoveLeft /> Back to Home
-          </span>
-        </button>
-      </Link>
-      <form className=" rounded-xl border bg-[#FFFFFF] px-3 py-1 overflow-hidden">
-        <h1 className="text-[#404040]">Ad Creation Form</h1>
-        <div>
-          <h1 className="text-[#555555] font-[500] mb-2 mt-5">Title</h1>
-          <div className="bg-[#F7F7F7] ">
-            <Input
-              className="w-full  p-2 "
-              placeholder="Write the heading of your ad here"
-            />
+      <div className="bg-white border w-full p-2">
+        <h1 className="font-bold text-2xl">Create Ad Campaign</h1>
+      </div>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          className="bg-white p-2 mt-2"
+        >
+          <div className="flex bg-gray-100 items-center justify-center">
+            <CampaignForm />
           </div>
-        </div>
-        <div>
-          <h1 className="text-[#555555] font-[500] mb-2 mt-5">
-            Ad Description
-          </h1>
-          <div className="bg-[#F7F7F7] ">
-            <TextArea
-              className="w-full p-2 "
-              placeholder="Write a brief description of your ad here"
-            />
+          <UploadCreatives />
+          <TargetingOptions />
+          <AdScheduling />
+          <BiddingBudget />
+          <div className="flex justify-end mt-2 gap-3">
+            <button
+              type="button"
+              className="bg-white border border-red-500 text-red-500 px-4 py-2"
+            >
+              Save as Draft
+            </button>
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-4 py-2"
+              disabled={methods.formState.isSubmitting}
+            >
+              Submit
+            </button>
           </div>
-        </div>
-        <div>
-          <AdCirculationDateTimePicker onChange={(data) => console.log("Create", data)} />
-
-        </div>
-        <div className="space-y-2 mt-3 w-full">
-          <h2 className="text-[#555555] font-medium">Target Audience</h2>
-          <p className="text-sm text-[#7D7D7D]">By Location</p>
-
-          <div className="flex items-center bg-[#F7F7F7] border border-[#EEEEEE] rounded-md px-3 py-2 w-full">
-            <Search className="w-4 h-4 text-[#A0A0A0] mr-2" />
-            <input
-              type="text"
-              placeholder="Add a State, region or city"
-              className="bg-transparent focus:outline-none w-full text-sm text-[#333333]"
-            />
-          </div>
-        </div>
-        <div className="mt-5">
-          <InvestmentSliderWithReset  />
-        </div>
-        <div>
-          <UploadMediaBox />
-        </div>
-        <div className="mt-4">
-          <div className="flex justify-end gap-2">
-            <button className="bg-amber-50 text-[#445E94] px-8 py-1 rounded-b-md">Save Draft</button>
-            <button className="bg-[#445E94] text-white px-8 py-1 rounded-md">Submit</button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </FormProvider>
     </div>
   );
 };
 
 export default CreateAdForm;
+
+// import React from "react";
+// import CampaignForm from "./CampaignForm";
+// import UploadCreatives from "./UploadCreatives";
+// import TargetingOptions from "./TargetingOptions";
+// import AdScheduling from "./AdScheduling";
+// import BiddingBudget from "./BiddingBudget";
+// import { useForm, FormProvider } from "react-hook-form";
+// import axios from "axios";
+// import { toast } from "react-toastify";
+// import { useNavigate } from "react-router";
+
+// const CreateAdForm = () => {
+//   const navigate = useNavigate();
+
+//   const methods = useForm();
+
+//   const onSubmit = async (data) => {
+//     console.log("Form data before sending:", data);
+
+//     try {
+//       const formData = new FormData();
+
+//       Object.entries(data).forEach(([key, value]) => {
+//         if (value instanceof File) {
+//           formData.append(key, value);
+//         } else if (value instanceof FileList) {
+//           Array.from(value).forEach((file) => formData.append(key, file));
+//         } else if (
+//           value instanceof Date ||
+//           (typeof value === "object" && "$d" in value)
+//         ) {
+
+//           formData.append(key, new Date(value.$d).toISOString());
+//         } else if (Array.isArray(value) || typeof value === "object") {
+//           formData.append(key, JSON.stringify(value));
+//         } else if (value !== undefined && value !== null) {
+//           formData.append(key, value.toString());
+//         }
+//       });
+
+//       console.log("Form data after processing:", formData);
+//       const response = await axios.post(
+//         "https://ff5a-203-192-220-137.ngrok-free.app/api/v1/campaign/createCampaign",
+//         formData,
+//         {
+//           withCredentials: true,
+//           headers: {
+//             "Content-Type": "multipart/form-data",
+//             Accept: "application/json",
+//           },
+//         }
+//       );
+
+//       if (response.data.status === 200) {
+//         toast.success("Campaign created successfully!");
+//         methods.reset();
+//         navigate("/");
+//       }
+//     } catch (error) {
+//       console.error("Submission error:", error);
+//       toast.error(
+//         error.response?.data?.errors?.[0]?.message ||
+//           error.response?.data?.message ||
+//           "An error occurred while creating the campaign."
+//       );
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <div className="bg-white border w-full p-2">
+//         <h1 className="font-bold text-2xl">Create Ad Campaign</h1>
+//       </div>
+//       <FormProvider {...methods}>
+//         <form
+//           onSubmit={methods.handleSubmit(onSubmit)}
+//           className="bg-white p-2 mt-2"
+//         >
+//           <div className="flex bg-gray-100 items-center justify-center">
+//             <CampaignForm />
+//           </div>
+//           <div>
+//             <UploadCreatives />
+//           </div>
+//           <div className="w-full">
+//             <TargetingOptions />
+//           </div>
+//           <div>
+//             <AdScheduling />
+//           </div>
+//           <div>
+//             <BiddingBudget />
+//           </div>
+//           <div className="flex justify-end mt-2 gap-3">
+//             <button
+//               type="button"
+//               className="bg-white border border-red-500 text-red-500 px-4 py-2"
+//             >
+//               Save as Draft
+//             </button>
+//             <button
+//               type="submit"
+//               className="bg-blue-600 text-white px-4 py-2"
+//               disabled={methods.formState.isSubmitting}
+//             >
+//               Submit
+//             </button>
+//           </div>
+//         </form>
+//       </FormProvider>
+//     </div>
+//   );
+// };
+
+// export default CreateAdForm;
+
+// import React from "react";
+// import CampaignForm from "./CampaignForm";
+// import UploadCreatives from "./UploadCreatives";
+// import TargetingOptions from "./TargetingOptions";
+// import AdScheduling from "./AdScheduling";
+// import BiddingBudget from "./BiddingBudget";
+// import { useForm, FormProvider } from "react-hook-form";
+// import axios from "axios";
+// import { campaignSchema } from "../../../utils/validation";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import { toast } from "react-toastify";
+// import { useNavigate } from "react-router";
+
+// const CreateAdForm = () => {
+//   //  const methods = useForm({
+//   //   resolver: zodResolver(campaignSchema),
+//   //   defaultValues: {
+//   //     selectedDays: [],
+//   //     timeSlot: '',
+//   //     ageGroups: [],
+//   //     cities: [],
+//   //     regions: [],
+//   //     targetRegions: [],
+//   //   },
+//   // });
+//   const navigate = useNavigate();
+//   const methods = useForm();
+//   const onSubmit = async (data) => {
+//     console.log("Form data:", data);
+
+//     try {
+//       const formData = new FormData();
+//       Object.entries(data).forEach(([key, value]) => {
+//         formData.append(key, value);
+//       });
+//       const response = await axios.post(
+//         "https://ff5a-203-192-220-137.ngrok-free.app/api/v1/campaign/createCampaign",
+//         formData,
+//         {
+//           withCredentials: true,
+//           headers: {
+//             "Content-Type": "multipart/form-data",
+//             Accept: "application/json",
+//           },
+//         }
+//       );
+//       console.log("Submission response:", response.data.status);
+//       if (response.data.status === 200) {
+//         console.log("Campaign created successfully:", response.data);
+//         toast.success("Campaign created successfully!");
+//         methods.reset();
+//         navigate("/");
+//       }
+//     } catch (error) {
+//       console.error("Submission error:", error);
+//       if (error.response && error.response.data) {
+//         console.log(error.response.data.message);
+//         toast.error(
+//           error.response?.data?.errors?.[0]?.message ||
+//             error.response?.data?.message ||
+//             "An error occurred while creating the campaign."
+//         );
+//       }
+//     }
+//   };
+//   return (
+//     <div>
+//       <div className="bg-white border w-full p-2">
+//         <h1 className="font-bold text-2xl">Create Ad Campaign</h1>
+//       </div>
+//       <FormProvider {...methods}>
+//         <form
+//           onSubmit={methods.handleSubmit(onSubmit)}
+//           className=" bg-white p-2 mt-2"
+//         >
+//           <div className="flex bg-gray-100 items-center justify-center">
+//             <CampaignForm />
+//           </div>
+//           <div>
+//             <UploadCreatives />
+//           </div>
+//           <div className="w-full">
+//             <TargetingOptions />
+//           </div>
+//           <div>
+//             <AdScheduling />
+//           </div>
+//           <div>
+//             <BiddingBudget />
+//           </div>
+//           <div className="flex justify-end mt-2 gap-3">
+//             <button className="bg-white border border-red-500 text-red-500 px-4 py-2 ">
+//               Save as Draft
+//             </button>
+//             <button
+//               className="bg-blue-600 text-white px-4 py-2"
+//               disabled={methods.formState.isSubmitting}
+//             >
+//               Submit
+//             </button>
+//           </div>
+//         </form>
+//       </FormProvider>
+//     </div>
+//   );
+// };
+
+// export default CreateAdForm;

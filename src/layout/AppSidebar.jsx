@@ -20,6 +20,7 @@ import {
   ReportsAI,
   RetailAnalysis,
   RetailerManagement,
+  SquarePen,
   TableIcon,
   UserCircleIcon,
 } from "../icons";
@@ -38,6 +39,11 @@ const navItems = [
     icon: <GridIcon />,
     name: "Dashboard",
     path: "/",
+  },
+  {
+    icon : <SquarePen />,
+    name : "Created Advertisements",
+    path: "/created-advertisements",
   },
   {
     icon: <RetailAnalysis />,

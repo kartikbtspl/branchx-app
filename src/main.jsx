@@ -6,6 +6,8 @@ import "flatpickr/dist/flatpickr.css";
 import App from "./App.jsx";
 import { AppWrapper } from "./components/common/PageMeta.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import 'video.js/dist/video-js.css';
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

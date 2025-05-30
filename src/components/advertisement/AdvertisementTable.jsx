@@ -19,7 +19,9 @@ const AdvertisementTable = () => {
         "https://6d22-203-192-220-137.ngrok-free.app/api/v1/campaign/getCampaigns",
         { withCredentials: true }
       );
+
       setTableData(response.data);
+      console.log("Fetched advertisements:", response.data);
     } catch (error) {
       console.error("Failed to fetch advertisements", error);
     }
@@ -28,7 +30,7 @@ const AdvertisementTable = () => {
   const handleStatusToggle = async (id) => {
     const updatedData = tableData.map((ad) =>
       ad.id === id
-        ? { ...ad, status: ad.status === "Active" ? "Inactive" : "Active" }
+        ? { ...ad, status: ad.status === true ? "Inactive" : "Active" }
         : ad
     );
     setTableData(updatedData);

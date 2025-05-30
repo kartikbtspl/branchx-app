@@ -22,6 +22,8 @@ import AdDetails from "./pages/Dashboard/AdDetails";
 import Login from "./components/form/Login";
 import ContactForm from "./components/others/ContactForm";
 // import ContactUs from "./pages/Others/ContactUs";
+import CreateAdForm from "./components/form/advertisement-form/CreateAdForm";
+import ViewAdvertisement from "./components/advertisement/ViewAdvertisement";
 
 export default function App() {
   return (
@@ -58,6 +60,10 @@ export default function App() {
 
           {/* Other Routes */}
           <Route path="addetails" element={<AdDetails />} />
+        
+            <Route path="/advertisement/create-ad" element = {<CreateAdForm />} />
+            <Route path="/advertisement/view-ad" element = {<ViewAdvertisement />} />
+
 
           </Route>
 

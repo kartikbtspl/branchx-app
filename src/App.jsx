@@ -18,6 +18,10 @@ import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
+import AdDetails from "./pages/Dashboard/AdDetails";
+import Login from "./components/form/Login";
+import ContactForm from "./components/others/ContactForm";
+// import ContactUs from "./pages/Others/ContactUs";
 
 export default function App() {
   return (
@@ -51,14 +55,21 @@ export default function App() {
             {/* Charts */}
             <Route path="/line-chart" element={<LineChart />} />
             <Route path="/bar-chart" element={<BarChart />} />
+
+          {/* Other Routes */}
+          <Route path="addetails" element={<AdDetails />} />
+
           </Route>
 
           {/* Auth Layout */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/contact-us" element={<ContactForm/>} />
 
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />
+          <Route path="log" element={<Login />} />
+
         </Routes>
       </Router>
     </>

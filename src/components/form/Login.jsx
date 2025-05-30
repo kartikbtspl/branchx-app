@@ -64,15 +64,15 @@ return (
               type="email"
               placeholder="you@example.com"
               // className="w-full border border-gray-300 rounded-md px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#13001f] transition"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={`w-full border ${
-                emailError ? "border-red-500" : "border-gray-300"
-              } rounded-md px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#13001f] transition`}
+              // value={email}
+              // onChange={(e) => setEmail(e.target.value)}
+              // className={`w-full border ${
+              //   emailError ? "border-red-500" : "border-gray-300"
+              // } rounded-md px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#13001f] transition`}
             />
-            {emailError && (
+            {/* {emailError && (
               <p className="text-red-500 text-xs mt-1">{emailError}</p>
-            )}
+            )} */}
           </div>
 
           <div>

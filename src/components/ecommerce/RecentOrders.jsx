@@ -9,7 +9,7 @@ import Badge from "../ui/badge/Badge";
 import { Eye, ChevronDown } from 'lucide-react';
 
 const adsData = [
-  { id: "#543", regions: "560076,560024, 560024, +12", views: "Rs 1,99,567" },
+  { id: "#543", regions: "560076,560024,  560024, +12", views: "Rs 1,99,567" },
   { id: "#562", regions: "560024, 560076, 560024, +16", views: "Rs 1,99,567" },
   { id: "#390", regions: "560076, 560024, 560024, +12", views: "Rs 1,99,567" },
   { id: "#550", regions: "560076, 560024, 560024, +20", views: "Rs 2,99,567" },
@@ -34,14 +34,14 @@ export default function RecentOrders() {
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse rounded-lg overflow-hidden text-sm">
           <thead>
-            <tr className="bg-[#E3E8F3] text-center">
-              <th className="px-4 py-2 font-semibold text-gray-700">Ad ID</th>
-              <th className="px-4 py-2 font-semibold text-gray-700">Region</th>
-              <th className="px-4 py-2 font-semibold text-gray-700">Ad Views</th>
-              <th className="px-4 py-2 font-semibold text-gray-700">Action</th>
+            <tr className="bg-[#E3E8F3] text-[#445E94] text-center">
+              <th className="px-4 py-2 font-semibold">Ad ID</th>
+              <th className="px-4 py-2 font-semibold">Region</th>
+              <th className="px-4 py-2 font-semibold">Ad Views</th>
+              <th className="px-4 py-2 font-semibold">Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-white">
             {adsData.map((ad, index) => (
               <tr key={index} className="border-t text-center">
                 <td className="px-4 py-2 text-gray-800">{ad.id}</td>

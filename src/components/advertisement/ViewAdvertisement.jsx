@@ -25,7 +25,7 @@ const ViewAdvertisement = () => {
           </Link>
         </div>
         <div className="flex gap-2">
-          <button className="py-[9px] px-12 bg-white text-[#C15360] rounded-lg">
+          <button className="py-[9px] px-12 border border-[#C15360] bg-white text-[#C15360] rounded-lg">
             Delete Ad
           </button>
           <button className="py-[9px] px-12 text-white bg-[#445E94] rounded-lg">

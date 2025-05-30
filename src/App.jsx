@@ -20,6 +20,8 @@ import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
 import CreateAdForm from "./components/form/advertisement-form/CreateAdForm";
 import ViewAdvertisement from "./components/advertisement/ViewAdvertisement";
+import { ToastContainer } from 'react-toastify';
+import AdvertisementTable from "./components/advertisement/AdvertisementTable";
 
 export default function App() {
   return (
@@ -57,7 +59,9 @@ export default function App() {
         
             <Route path="/advertisement/create-ad" element = {<CreateAdForm />} />
             <Route path="/advertisement/view-ad" element = {<ViewAdvertisement />} />
+            <Route path="/created-advertisements" element = {<AdvertisementTable/> }  />
 
+                
 
           </Route>
 
@@ -65,10 +69,13 @@ export default function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
 
+      
+
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </>
   );
 }

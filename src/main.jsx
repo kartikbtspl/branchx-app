@@ -6,15 +6,18 @@ import "flatpickr/dist/flatpickr.css";
 import App from "./App.jsx";
 import { AppWrapper } from "./components/common/PageMeta.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
-import 'video.js/dist/video-js.css';
-
+import "video.js/dist/video-js.css";
+import { Provider } from "react-redux";
+import { store } from "./redux/store.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ThemeProvider>
-      <AppWrapper>
-        <App />
-      </AppWrapper>
-    </ThemeProvider>
-  </StrictMode>,
+    <Provider store={store}>
+      <ThemeProvider>
+        <AppWrapper>
+          <App />
+        </AppWrapper>
+      </ThemeProvider>
+    </Provider>
+  </StrictMode>
 );

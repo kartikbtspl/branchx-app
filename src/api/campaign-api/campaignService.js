@@ -1,4 +1,3 @@
-
 import axiosInstance from "../../config/axiosConfig";
 
 export const createCampaignAPI = async (data) => {
@@ -40,18 +39,16 @@ export const createCampaignAPI = async (data) => {
 };
 
 export const getCampaignsAPI = async () => {
-    const response = await axiosInstance.get("/api/v1/campaign/getCampaigns" , {withCredentials: true});
-    console.log("Response from getCampaignsAPI:", response);
-    return response.data;
-}
+  const response = await axiosInstance.get("/api/v1/campaign/getCampaigns", {
+    withCredentials: true,
+  });
+  console.log("Response from getCampaignsAPI:", response);
+  return response.data;
+};
 
-export const toggleCampaignStatusAPI = async ( id, status ) => {
-    const response = await axiosInstance.put(
-        `/api/v1/campaign/${id}/status`,
-         { status }
-        
-       
-    );
-    return response.data;
-
-}
+export const toggleCampaignStatusAPI = async (id, status) => {
+  const response = await axiosInstance.put(`/api/v1/campaign/${id}/status`, {
+    status,
+  });
+  return response.data;
+};

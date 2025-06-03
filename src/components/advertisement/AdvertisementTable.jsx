@@ -77,7 +77,7 @@ const AdvertisementTable = () => {
                   <span className="text-yellow-600 font-semibold">
                     Waiting for Approval
                   </span>
-                ) : ad.isApproved === "REJECT" ? (
+                ) : ad.isApproved === "REJECTED" ? (
                   <span className="text-red-600 font-semibold">Rejected</span>
                 ) : ad.isApproved === "APPROVED" && !ad.isPayment ? (
                   <button

@@ -10,7 +10,7 @@ export default function ContactForm() {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      await axios.post("https://49b0-203-192-220-137.ngrok-free.app/api/users", data);
+      await axios.post("http://192.168.1.36:3000/api/v1/user/createUser", data);
       alert("Form submitted!");
       reset();
     } catch (err) {

@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useFormContext, Controller } from "react-hook-form";
 import { Autocomplete, TextField } from "@mui/material";
 import { indianCities } from "../../../utils/ad-campaign-data/cities";
@@ -34,7 +34,7 @@ const TargetingOptions = () => {
     "Occupation",
     "Interests",
   ];
-  const adDeviceOptions = ["Cube", "TV", "Billboard"];
+  const adDeviceOptions = ["Cube", "TV", "Billboard" , "Mobile App" , "website"];
 
   return (
     <div className="bg-white w-full max-w-6xl mx-auto p-6 rounded-lg shadow">

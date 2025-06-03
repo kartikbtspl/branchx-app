@@ -54,6 +54,8 @@ const CampaignForm = () => {
              {...register('campaignObjective')}
             >
               <option>Brand Awareness</option>
+              <option>Lead Generation</option>
+              <option>Sales Promotion</option>
               {/* Add more options if needed */}
             </select>
             {/* {errors.campaignObjective && (
@@ -72,6 +74,7 @@ const CampaignForm = () => {
             {...register('campaignType')}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400">
               <option>Video Ad</option>
+              <option>Image Ad</option>
               {/* Add more options if needed */}
             </select>
             {/* {errors.campaignType && (

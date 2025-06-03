@@ -26,6 +26,7 @@ import CreateAdForm from "./components/form/advertisement-form/CreateAdForm";
 import ViewAdvertisement from "./components/advertisement/ViewAdvertisement";
 import { ToastContainer } from 'react-toastify';
 import AdvertisementTable from "./components/advertisement/AdvertisementTable";
+import CampaignCard from "./components/advertisement/CampaignCard";
 
 export default function App() {
   return (
@@ -66,6 +67,8 @@ export default function App() {
             <Route path="/advertisement/create-ad" element = {<CreateAdForm />} />
             <Route path="/advertisement/view-ad" element = {<ViewAdvertisement />} />
             <Route path="/created-advertisements" element = {<AdvertisementTable/> }  />
+
+            <Route path="/campaigns" element={<CampaignCard />} />
 
                 
 

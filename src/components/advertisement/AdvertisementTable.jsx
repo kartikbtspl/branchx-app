@@ -16,7 +16,7 @@ const AdvertisementTable = () => {
   const getAdvertisements = async () => {
     try {
       const response = await axios.get(
-        "https://6d22-203-192-220-137.ngrok-free.app/api/v1/campaign/getCampaigns",
+        "https://0637-2409-4081-2d18-d7cc-fc1d-9ac7-f9da-2341.ngrok-free.app/api/v1/campaign/getCampaigns",
         { withCredentials: true }
       );
 

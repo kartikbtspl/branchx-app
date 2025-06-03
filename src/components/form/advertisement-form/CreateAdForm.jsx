@@ -48,7 +48,7 @@ const CreateAdForm = () => {
       }
 
       const response = await axios.post(
-        "https://6d22-203-192-220-137.ngrok-free.app/api/v1/campaign/createCampaign",
+        "https://0637-2409-4081-2d18-d7cc-fc1d-9ac7-f9da-2341.ngrok-free.app/api/v1/campaign/createCampaign",
         formData,
         {
           withCredentials: true,

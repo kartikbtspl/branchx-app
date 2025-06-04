@@ -17,13 +17,15 @@ const SignInForm = () => {
     dispatch(loginUser(data))
       .unwrap()
       .then((res) => {
-        if (res.token) {
-          localStorage.setItem("token", res.token);
+        console.log("Login response:", res);
+        if (res?.data?.token) {
+          localStorage.setItem("token", res?.data?.token);
         }
         navigate("/");
       })
       .catch(() => {
-        // Error handled by Redux state
+        console.log("Login failed");
+        
       });
   };
 
@@ -60,7 +62,7 @@ const SignInForm = () => {
       {/* Right Section */}
       <div className="flex flex-col w-[65%] justify-center items-center px-8 py-12">
         <img src="/images/logo/bx-logo.svg" alt="Xpandifi Logo" className="h-12 mb-4" />
-        <h2 className="text-2xl font-semibold text-gray-800 mb-1">Welcome Back to Xpandifi</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-1">Welcome Back to Branch-X</h2>
         <p className="text-sm text-gray-500 mb-6">Log in to manage your global retail operations.</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md space-y-4" noValidate>
@@ -135,7 +137,7 @@ const SignInForm = () => {
         </form>
 
         <p className="text-sm text-gray-500 mt-8">
-          Don't have an Xpandifi account?{" "}
+          Don't have an Branch-x account?{" "}
           <a href="#" className="text-blue-600 hover:underline">Register here</a>
         </p>
       </div>

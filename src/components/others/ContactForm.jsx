@@ -10,7 +10,7 @@ export default function ContactForm() {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      await axios.post("https://49b0-203-192-220-137.ngrok-free.app/api/users", data);
+      await axios.post("http://192.168.1.36:3000/api/v1/user/createUser", data);
       alert("Form submitted!");
       reset();
     } catch (err) {
@@ -64,7 +64,7 @@ export default function ContactForm() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#bdc3c7] to-[#2c3e50)] px-4 py-8">
       <div className="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg p-6 lg:p-12 gap-10 lg:gap-20 w-full max-w-5xl">
-        {/* Left Section */}
+    
         <div className="lg:w-1/2 space-y-3">
           <h2 className="text-4xl font-bold text-green-700">Say Hello</h2>
           <p className="text-gray-700">
@@ -93,7 +93,7 @@ export default function ContactForm() {
           </div>
         </div>
 
-        {/* Right Section */}
+        
         <form
           className="lg:w-1/2 space-y-3"
           onSubmit={handleSubmit(onSubmit)}

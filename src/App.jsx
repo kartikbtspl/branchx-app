@@ -24,9 +24,10 @@ import ContactForm from "./components/others/ContactForm";
 // import ContactUs from "./pages/Others/ContactUs";
 import CreateAdForm from "./components/form/advertisement-form/CreateAdForm";
 import ViewAdvertisement from "./components/advertisement/ViewAdvertisement";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 import AdvertisementTable from "./components/advertisement/AdvertisementTable";
 import CampaignCard from "./components/advertisement/CampaignCard";
+import DistributorDashboard from "./components/distributor/DistributorDashboard";
 
 export default function App() {
   return (
@@ -61,30 +62,34 @@ export default function App() {
             <Route path="/line-chart" element={<LineChart />} />
             <Route path="/bar-chart" element={<BarChart />} />
 
-          {/* Other Routes */}
-          <Route path="addetails" element={<AdDetails />} />
-        
-            <Route path="/advertisement/create-ad" element = {<CreateAdForm />} />
-            <Route path="/advertisement/view-ad" element = {<ViewAdvertisement />} />
-            <Route path="/created-advertisements" element = {<AdvertisementTable/> }  />
+            {/* Other Routes */}
+            <Route path="addetails" element={<AdDetails />} />
 
+            <Route path="/advertisement/create-ad" element={<CreateAdForm />} />
+            <Route
+              path="/advertisement/view-ad"
+              element={<ViewAdvertisement />}
+            />
+            <Route
+              path="/created-advertisements"
+              element={<AdvertisementTable />}
+            />
             <Route path="/campaigns" element={<CampaignCard />} />
 
-                
 
+
+            {/* Distributor */}
+            <Route path="/distributor" element={<DistributorDashboard/>} />
           </Route>
 
           {/* Auth Layout */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/contact-us" element={<ContactForm/>} />
-
-      
+          <Route path="/contact-us" element={<ContactForm />} />
 
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />
           <Route path="log" element={<Login />} />
-
         </Routes>
       </Router>
       <ToastContainer position="bottom-right" autoClose={3000} />

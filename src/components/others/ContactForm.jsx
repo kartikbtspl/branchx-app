@@ -1,23 +1,51 @@
-import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { loginUser } from "../../redux/slices/authSlice";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
 import axios from "axios";
+import { toast } from "react-toastify";
+
+// Spinner Component
+const Spinner = ({ size = "sm", className = "" }) => (
+  <svg
+    className={`animate-spin ${size === "sm" ? "w-4 h-4" : "w-6 h-6"} text-white ${className}`}
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <circle
+      className="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      strokeWidth="4"
+    ></circle>
+    <path
+      className="opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8v8z"
+    ></path>
+  </svg>
+);
 
 const SignInForm = () => {
-  const { register, handleSubmit, watch, reset } = useForm();
+  const { register, handleSubmit, watch, reset, formState } = useForm();
   const selectedRole = watch("role");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    setLoading(true);
     try {
-      await axios.post("https://branchx-backend-api-4.onrender.com/api/v1/user/createUser", data, {withCredentials: true});
-      alert("Form submitted!");
+      await axios.post(
+        "https://branchx-backend-api-4.onrender.com/api/v1/user/createUser",
+        data,
+        { withCredentials: true }
+      );
+      toast.success("Form submitted successfully!");
       reset();
     } catch (err) {
       console.error("Submission failed:", err);
-      alert("Submission failed.");
+      toast.error("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,31 +91,42 @@ const SignInForm = () => {
         return null;
     }
   };
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Section */}
       <div className="bg-gradient-to-br from-blue-800 to-blue-600 text-white w-[35%] p-10 flex flex-col justify-center">
-        <h1 className="text-4xl font-bold mb-6">Expand Fast<br />Sell Globally</h1>
+        <h1 className="text-4xl font-bold mb-6">
+          Expand Fast
+          <br />
+          Sell Globally
+        </h1>
         <div className="space-y-6">
           <div className="flex items-start space-x-3">
             <div className="text-2xl">📦</div>
             <div>
               <p className="font-semibold">Seamless Selling</p>
-              <p className="text-sm">Effortlessly expand to European & UK marketplaces.</p>
+              <p className="text-sm">
+                Effortlessly expand to European & UK marketplaces.
+              </p>
             </div>
           </div>
           <div className="flex items-start space-x-3">
             <div className="text-2xl">🎯</div>
             <div>
               <p className="font-semibold">Smart Logistics & Analytics</p>
-              <p className="text-sm">Optimize inventory, track orders & gain powerful insights.</p>
+              <p className="text-sm">
+                Optimize inventory, track orders & gain powerful insights.
+              </p>
             </div>
           </div>
           <div className="flex items-start space-x-3">
             <div className="text-2xl">💰</div>
             <div>
               <p className="font-semibold">Cross-Border Made Easy</p>
-              <p className="text-sm">Simplified compliance, invoicing & fulfillment.</p>
+              <p className="text-sm">
+                Simplified compliance, invoicing & fulfillment.
+              </p>
             </div>
           </div>
         </div>
@@ -95,9 +134,17 @@ const SignInForm = () => {
 
       {/* Right Section */}
       <div className="flex flex-col w-[65%] justify-center items-center px-8 py-12">
-        <img src="/images/logo/bx-logo.svg" alt="Xpandifi Logo" className="h-12 mb-4" />
-        <h2 className="text-2xl font-semibold text-gray-800 mb-1">Welcome Back to Branch-X</h2>
-        <p className="text-sm text-gray-500 mb-6">Log in to manage your global retail operations.</p>
+        <img
+          src="/images/logo/bx-logo.svg"
+          alt="Xpandifi Logo"
+          className="h-12 mb-4"
+        />
+        <h2 className="text-2xl font-semibold text-gray-800 mb-1">
+          Welcome Back to Branch-X
+        </h2>
+        <p className="text-sm text-gray-500 mb-6">
+          Log in to manage your global retail operations.
+        </p>
 
         <form
           className="lg:w-1/2 space-y-3"
@@ -188,9 +235,15 @@ const SignInForm = () => {
           ></textarea>
           <button
             type="submit"
-            className="bg-blue-600 text-white py-2 px-6 w-full hover:bg-teal-700 mt-2"
+            disabled={formState.isSubmitting}
+            className={`bg-blue-600 text-white py-2 px-6 w-full mt-2 flex items-center justify-center gap-2 ${
+              formState.isSubmitting
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-teal-700"
+            }`}
           >
-            Send
+            {formState.isSubmitting && <Spinner size="sm" />}
+            {formState.isSubmitting ? "Submitting" : "Send"}
           </button>
         </form>
       </div>
@@ -201,23 +254,32 @@ const SignInForm = () => {
 export default SignInForm;
 
 
-// import React from "react";
+
+// import { useState } from "react";
 // import { useForm } from "react-hook-form";
 // import axios from "axios";
-// import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+// import { toast } from "react-toastify";
 
-// export default function ContactForm() {
-//   const { register, handleSubmit, watch, reset } = useForm();
+// const SignInForm = () => {
+//   const { register, handleSubmit, watch, reset, formState } = useForm();
 //   const selectedRole = watch("role");
+//   const [loading, setLoading] = useState(false);
 
 //   const onSubmit = async (data) => {
-//     console.log(data);
+//     setLoading(true);
 //     try {
-//       await axios.post("http://192.168.1.36:3000/api/v1/user/createUser", data);
-//       alert("Form submitted!");
+//       await axios.post(
+//         "https://branchx-backend-api-4.onrender.com/api/v1/user/createUser",
+//         data,
+//         { withCredentials: true }
+//       );
+//       toast.success("Form submitted successfully!");
 //       reset();
 //     } catch (err) {
-//       alert("Submission failed.");
+//       console.error("Submission failed:", err);
+//       toast.error("Submission failed. Please try again.");
+//     } finally {
+//       setLoading(false);
 //     }
 //   };
 
@@ -264,39 +326,64 @@ export default SignInForm;
 //     }
 //   };
 
+//   // if (loading) {
+//   //   return <Spinner />;
+//   // }
+
 //   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#bdc3c7] to-[#2c3e50)] px-4 py-8">
-//       <div className="flex flex-col lg:flex-row bg-white rounded-2xl shadow-lg p-6 lg:p-12 gap-10 lg:gap-20 w-full max-w-5xl">
-//         {/* Left Section */}
-//         <div className="lg:w-1/2 space-y-3">
-//           <h2 className="text-4xl font-bold text-green-700">Say Hello</h2>
-//           <p className="text-gray-700">
-//             We would love to hear from you. As an agency or a brand, you can be
-//             ahead of the curve to take full advantage of the DOOH opportunities.
-//             As a Inventory space provider, you can unlock additional revenue
-//             opportunities.
-//           </p>
-//           <div>
-//             <h4 className="font-bold">Phone</h4>
-//             <p>+91 720 777 9800</p>
+//     <div className="min-h-screen flex flex-col md:flex-row">
+//       {/* Left Section */}
+//       <div className="bg-gradient-to-br from-blue-800 to-blue-600 text-white w-[35%] p-10 flex flex-col justify-center">
+//         <h1 className="text-4xl font-bold mb-6">
+//           Expand Fast
+//           <br />
+//           Sell Globally
+//         </h1>
+//         <div className="space-y-6">
+//           <div className="flex items-start space-x-3">
+//             <div className="text-2xl">📦</div>
+//             <div>
+//               <p className="font-semibold">Seamless Selling</p>
+//               <p className="text-sm">
+//                 Effortlessly expand to European & UK marketplaces.
+//               </p>
+//             </div>
 //           </div>
-//           <div>
-//             <h4 className="font-bold">Email</h4>
-//             <p>branchx@gmail.com</p>
+//           <div className="flex items-start space-x-3">
+//             <div className="text-2xl">🎯</div>
+//             <div>
+//               <p className="font-semibold">Smart Logistics & Analytics</p>
+//               <p className="text-sm">
+//                 Optimize inventory, track orders & gain powerful insights.
+//               </p>
+//             </div>
 //           </div>
-//           <div>
-//             <h4 className="font-bold">Social Media</h4>
-//             <div className="flex space-x-4 mt-2 text-black text-xl">
-//               <i className="fab fa-facebook-f"><Facebook /></i>
-//               <i className="fab fa-linkedin-in"><Linkedin /></i>
-//               <i className="fab fa-twitter"><Twitter /></i>
-//               <i className="fab fa-instagram"><Instagram/></i>
-//               <i className="fab fa-youtube"><Youtube/></i>
+//           <div className="flex items-start space-x-3">
+//             <div className="text-2xl">💰</div>
+//             <div>
+//               <p className="font-semibold">Cross-Border Made Easy</p>
+//               <p className="text-sm">
+//                 Simplified compliance, invoicing & fulfillment.
+//               </p>
 //             </div>
 //           </div>
 //         </div>
+//       </div>
 
-//         {/* Right Section */}
+//       {/* Right Section */}
+//       <div className="flex flex-col w-[65%] justify-center items-center px-8 py-12">
+//         <img
+//           src="/images/logo/bx-logo.svg"
+//           alt="Xpandifi Logo"
+//           className="h-12 mb-4"
+//         />
+//         <h2 className="text-2xl font-semibold text-gray-800 mb-1">
+//           Welcome Back to Branch-X
+//         </h2>
+//         <p className="text-sm text-gray-500 mb-6">
+//           Log in to manage your global retail operations.
+//         </p>
+
 //         <form
 //           className="lg:w-1/2 space-y-3"
 //           onSubmit={handleSubmit(onSubmit)}
@@ -386,12 +473,20 @@ export default SignInForm;
 //           ></textarea>
 //           <button
 //             type="submit"
-//             className="bg-blue-600 text-white py-2 px-6 w-full hover:bg-teal-700 mt-2"
+//             disabled={formState.isSubmitting}
+//             className={`bg-blue-600 text-white py-2 px-6 w-full mt-2 ${
+//               formState.isSubmitting
+//                 ? "opacity-50 cursor-not-allowed"
+//                 : "hover:bg-teal-700"
+//             }`}
 //           >
-//             Send
+//             {formState.isSubmitting ? "Submitting" : "Send"}
 //           </button>
 //         </form>
 //       </div>
 //     </div>
 //   );
-// }
+// };
+
+// export default SignInForm;
+

@@ -4,22 +4,29 @@ import { loginUser } from "../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { useState } from "react";
+
 
 const SignInForm = () => {
+  
   const { register, handleSubmit, watch, reset } = useForm();
   const selectedRole = watch("role");
 
   const onSubmit = async (data) => {
     console.log(data);
+    setLoading(true);
     try {
       await axios.post("https://branchx-backend-api-4.onrender.com/api/v1/user/createUser", data, {withCredentials: true});
       alert("Form submitted!");
       reset();
+      setLoading(false);
     } catch (err) {
       console.error("Submission failed:", err);
       alert("Submission failed.");
+      setLoading(false);
     }
   };
+
 
   const renderAdditionalInput = () => {
     switch (selectedRole) {
@@ -63,7 +70,8 @@ const SignInForm = () => {
         return null;
     }
   };
-  return (
+
+   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Section */}
       <div className="bg-gradient-to-br from-blue-800 to-blue-600 text-white w-[35%] p-10 flex flex-col justify-center">

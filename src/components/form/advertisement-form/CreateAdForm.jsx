@@ -5,7 +5,7 @@ import TargetingOptions from "./TargetingOptions";
 import AdScheduling from "./AdScheduling";
 import BiddingBudget from "./BiddingBudget";
 import { useForm, FormProvider } from "react-hook-form";
-
+import RingLoader from "react-spinners/RingLoader";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createCampaign } from "../../../redux/slices/campaignSlice";
@@ -17,8 +17,8 @@ const CreateAdForm = () => {
   const { loading } = useSelector((state) => state.campaign);
   const onSubmit = async (data) => {
     console.log("Form data before sending:", data);
-     const result = await dispatch(createCampaign(data));
-     
+    const result = await dispatch(createCampaign(data));
+
     if (createCampaign.fulfilled.match(result)) {
       methods.reset();
       navigate("/");
@@ -27,7 +27,16 @@ const CreateAdForm = () => {
   if (loading) {
     return (
       <div className="text-center py-10">
-        <p className="text-gray-500 dark:text-gray-400">Creating campaign...</p>
+        <p className="text-blue-500 text-3xl dark:text-gray-400">Creating campaign...</p>
+        <div className="flex justify-center items-center h-64">
+          <RingLoader
+          color="#1d2189"
+          cssOverride={{}}
+          size={200}
+          speedMultiplier={1}
+          className="flex justify-center items-center mt-4"
+        />
+        </div>
       </div>
     );
   }
@@ -71,4 +80,3 @@ const CreateAdForm = () => {
 };
 
 export default CreateAdForm;
-

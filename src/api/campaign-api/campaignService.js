@@ -26,11 +26,13 @@ export const createCampaignAPI = async (data) => {
       formData.append(key, value.toString());
     }
   });
+  const token = localStorage.getItem("token");
   const response = await axiosInstance.post(
     "/api/v1/campaign/createCampaign",
     formData,
     {
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
       },
     }
@@ -39,8 +41,14 @@ export const createCampaignAPI = async (data) => {
 };
 
 export const getCampaignsAPI = async () => {
+  const token = localStorage.getItem("token");
   const response = await axiosInstance.get("/api/v1/campaign/getCampaigns", {
     withCredentials: true,
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   });
   console.log("Response from getCampaignsAPI:", response);
   return response.data;

@@ -5,6 +5,7 @@ import {
   toggleCampaignStatus,
 } from "../../redux/slices/campaignSlice";
 import CampaignCard from "./CampaignCard";
+import RingLoader from "react-spinners/RingLoader";
 
 const AdvertisementTable = () => {
   const dispatch = useDispatch();
@@ -26,36 +27,61 @@ const AdvertisementTable = () => {
   if (loading) {
     return (
       <div className="text-center py-10">
+        <p className="text-blue-500 text-3xl dark:text-gray-400">
+          Loading campaign...
+        </p>
+        <div className="flex justify-center items-center h-64">
+          <RingLoader
+            color="#1d2189"
+            cssOverride={{}}
+            size={200}
+            speedMultiplier={1}
+            className="flex justify-center items-center mt-4"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (!campaigns || campaigns.length === 0) {
+    return (
+      <div className="text-center py-10">
         <p className="text-gray-500 dark:text-gray-400">
-          Loading advertisements...
+          No campaigns found.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
-      {campaigns.map((campaign) => (
-        <CampaignCard
-          key={campaign.id}
-          campaignName={campaign.campaignName}
-          creativeFile = {campaign.creativeFile}
-          campaignObjective={campaign.campaignObjective}
-          isApproved={campaign.isApproved}
-          isPayment={campaign.isPayment}
-          status={campaign.status}
-          scheduleDate={campaign.scheduleDate}
-          timeSlot={campaign.timeSlot}
-          onToggle={() => handleToggle(campaign.id, campaign.status)}
-          onReconfigure={() => handleReconfigure(campaign.id)}
-        />
-      ))}
+    <div>
+      <div>
+        <h1 className="font-bold text-blue-700 text-2xl text mb-4">
+          Campaigns
+        </h1>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
+        {campaigns.map((campaign) => (
+          <CampaignCard
+            key={campaign.id}
+            campaignName={campaign.campaignName}
+            creativeFile={campaign.creativeFile}
+            campaignObjective={campaign.campaignObjective}
+            isApproved={campaign.isApproved}
+            isPayment={campaign.isPayment}
+            status={campaign.status}
+            scheduleDate={campaign.scheduleDate}
+            timeSlot={campaign.timeSlot}
+            onToggle={() => handleToggle(campaign.id, campaign.status)}
+            onReconfigure={() => handleReconfigure(campaign.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
 export default AdvertisementTable;
-
 
 // import { useEffect } from "react";
 
@@ -87,7 +113,7 @@ export default AdvertisementTable;
 
 //   const handlePayment = (id) => {
 //     console.log(id);
-    
+
 //   }
 
 //   if (loading) {

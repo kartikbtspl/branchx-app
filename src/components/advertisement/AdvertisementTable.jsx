@@ -5,7 +5,7 @@ import {
   toggleCampaignStatus,
 } from "../../redux/slices/campaignSlice";
 import CampaignCard from "./CampaignCard";
-import RingLoader from "react-spinners/RingLoader";
+import MoonLoader from "react-spinners/MoonLoader";
 
 const AdvertisementTable = () => {
   const dispatch = useDispatch();
@@ -28,13 +28,19 @@ const AdvertisementTable = () => {
     return (
       <div className="text-center py-10">
         <p className="text-blue-500 text-3xl dark:text-gray-400">
-          Loading campaign...
+          Loading Campaigns...
         </p>
         <div className="flex justify-center items-center h-64">
-          <RingLoader
+          {/* <RingLoader
             color="#1d2189"
             cssOverride={{}}
             size={200}
+            speedMultiplier={1}
+            className="flex justify-center items-center mt-4"
+          /> */}
+          <MoonLoader
+            color="#5F7C95"
+            size={100}
             speedMultiplier={1}
             className="flex justify-center items-center mt-4"
           />
@@ -46,9 +52,7 @@ const AdvertisementTable = () => {
   if (!campaigns || campaigns.length === 0) {
     return (
       <div className="text-center py-10">
-        <p className="text-gray-500 dark:text-gray-400">
-          No campaigns found.
-        </p>
+        <p className="text-gray-500 dark:text-gray-400">No campaigns found.</p>
       </div>
     );
   }
@@ -64,6 +68,7 @@ const AdvertisementTable = () => {
         {campaigns.map((campaign) => (
           <CampaignCard
             key={campaign.id}
+            id={campaign.id}
             campaignName={campaign.campaignName}
             creativeFile={campaign.creativeFile}
             campaignObjective={campaign.campaignObjective}

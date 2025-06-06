@@ -221,7 +221,7 @@ const SignInForm = () => {
               >
                 <option value="">Choose</option>
                 <option value="Advertiser">Advertiser</option>
-                <option value="Distributer">Distributer</option>
+                <option value="Distributer">Distributor</option>
                 <option value="Retailer">Retailer</option>
               </select>
             </div>

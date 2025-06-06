@@ -27,6 +27,7 @@ import {
 } from "../icons";
 import { useSidebar } from "../context/SidebarContext";
 import SidebarWidget from "./SidebarWidget";
+import { useSelector } from "react-redux";
 
 const advertiserItems = [
   {
@@ -36,7 +37,7 @@ const advertiserItems = [
   },
   {
     icon : <SquarePen />,
-    name : "Created Advertisements",
+    name : "Campaigns",
     path: "/created-advertisements",
   },
   {
@@ -151,6 +152,7 @@ const othersItems = [
 const AppSidebar = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const location = useLocation();
+ // Assuming role is stored in auth slice
   const [role, setRole] = useState("");
 
   const [openSubmenu, setOpenSubmenu] = useState(null);

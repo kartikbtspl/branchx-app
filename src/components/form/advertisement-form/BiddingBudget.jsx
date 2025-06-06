@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 
-const slopeOptions = ["Flat", "Aggressive", "Conservative"];
+
 
 const BiddingBudget = () => {
   const {
@@ -72,7 +72,7 @@ const BiddingBudget = () => {
         </div>
 
         {/* Slope Preference Type */}
-        <div>
+        {/* <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Slope Preference Type
           </label>
@@ -97,7 +97,7 @@ const BiddingBudget = () => {
               {errors.slopePreference.message}
             </p>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

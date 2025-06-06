@@ -28,6 +28,7 @@ import { ToastContainer } from "react-toastify";
 import AdvertisementTable from "./components/advertisement/AdvertisementTable";
 import CampaignCard from "./components/advertisement/CampaignCard";
 import DistributorDashboard from "./components/distributor/DistributorDashboard";
+import CampaignDetails from "./components/advertisement/CampaignDetails";
 
 export default function App() {
   return (
@@ -75,6 +76,7 @@ export default function App() {
               element={<AdvertisementTable />}
             />
             <Route path="/campaigns" element={<CampaignCard />} />
+            <Route path = "/campaign/:id" element={<CampaignDetails />} />
 
 
 

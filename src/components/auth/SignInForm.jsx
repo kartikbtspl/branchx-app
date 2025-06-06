@@ -37,29 +37,51 @@ const SignInForm = () => {
   } = useForm();
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = async (data) => {
-    setLoading(true);
-    dispatch(loginUser(data))
-      .unwrap()
-      .then((res) => {
-        console.log("Login response:", res);
-        if (res?.data?.token) {
-          localStorage.setItem("token", res?.data?.token);
-        }
-        navigate("/");
-      })
-      .catch(() => {
-        console.log("Login failed");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+  const onSubmit = async(data) => {
+    setLoading(true)
+    try{
+      const response = await dispatch(loginUser(data));
+     
+      console.log("Login response:", response?.payload?.data?.token);
+
+      if (response?.payload?.data?.token) {
+        localStorage.setItem("token", response?.payload?.data?.token);
+      }
+      console.log(response);
+      navigate("/");
+    }
+    catch(error) {
+      console.error("Login error:", error);
+    }
+    finally{
+      setLoading(false);
+    }
+  }
+
+  // const onSubmit = async (data) => {
+  //   setLoading(true);
+  //   dispatch(loginUser(data))
+  //     .unwrap()
+  //     .then((res) => {
+  //       console.log("Login response:", res);
+  //       if (res?.data?.token) {
+  //         localStorage.setItem("token", res?.data?.token);
+  //       }
+  //       console.log(res);
+  //       navigate("/");
+  //     })
+  //     .catch(() => {
+  //       console.log("Login failed");
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Section */}
-      <div className="bg-gradient-to-br from-blue-800 to-blue-600 text-white w-[35%] p-10 flex flex-col justify-center">
+      <div className="bg-gradient-to-br from-[#445E94] to-[#5F7C95] text-white w-[35%] p-10 flex flex-col justify-center">
         <h1 className="text-4xl font-bold mb-6">
           Expand Fast
           <br />
@@ -99,12 +121,12 @@ const SignInForm = () => {
       {/* Right Section */}
       <div className="flex flex-col w-[65%] justify-center items-center px-8 py-12">
         <img src="/images/logo/bx-logo.svg" alt="Xpandifi Logo" className="h-12 mb-4" />
-        <h2 className="text-2xl font-semibold text-gray-800 mb-1">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2">
           Welcome Back to Branch-X
         </h2>
-        <p className="text-sm text-gray-500 mb-6">
+        {/* <p className="text-sm text-gray-500 mb-6">
           Log in to manage your global retail operations.
-        </p>
+        </p> */}
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -178,10 +200,10 @@ const SignInForm = () => {
           <button
             type="submit"
             disabled={isSubmitting || loading}
-            className={`w-full py-2 flex justify-center items-center gap-2 text-white rounded transition ${
+            className={`w-full py-2 flex justify-center items-center gap-2 text-white rounded-full transition ${
               isSubmitting || loading
-                ? "bg-blue-400 cursor-not-allowed"
-                : "bg-blue-700 hover:bg-blue-800"
+                ? "bg-[#445E94] cursor-not-allowed"
+                : "bg-[#445E94] hover:bg-[#5F7C95]"
             }`}
           >
             {isSubmitting || loading ? <Spinner /> : null}

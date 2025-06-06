@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+ 
     <Provider store={store}>
       <ThemeProvider>
         <AppWrapper>
@@ -19,5 +19,5 @@ createRoot(document.getElementById("root")).render(
         </AppWrapper>
       </ThemeProvider>
     </Provider>
-  </StrictMode>
+  
 );

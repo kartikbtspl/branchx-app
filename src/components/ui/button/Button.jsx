@@ -1,29 +1,32 @@
 import { ReactNode } from "react";
 
-const Button = ({
-  children,
-  size = "md",
-  variant = "primary",
-  startIcon,
-  endIcon,
-  onClick,
-  className = "",
-  disabled = false,
-}) => {
-  // Size Classes
-  const sizeClasses = {
+ const sizeClasses = {
     sm: "px-4 py-3 text-sm",
     md: "px-5 py-3.5 text-sm",
     cs: "px-[25px] py-[9px] text-sm",
   };
 
-  // Variant Classes
   const variantClasses = {
     primary:
       "bg-[#445E94] text-white shadow-theme-xs hover:bg-brand-600 disabled:bg-brand-300",
     outline:
       "bg-white text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-400 dark:ring-gray-700 dark:hover:bg-white/[0.03] dark:hover:text-gray-300",
   };
+const Button = ({
+  children,
+  size = "md",
+  variant = "primary",
+  startIcon,
+  endIcon,
+  onClick=() => {},
+  className = "",
+  disabled = false,
+}) => {
+  // Size Classes
+ 
+
+  // Variant Classes
+
 
   return (
     <button
@@ -42,4 +45,15 @@ const Button = ({
   );
 };
 
+
+// Button.propTypes = {
+//   children: PropTypes.node.isRequired,
+//   size: PropTypes.oneOf(["sm", "md", "cs"]),
+//   variant: PropTypes.oneOf(["primary", "outline"]),
+//   startIcon: PropTypes.node,
+//   endIcon: PropTypes.node,
+//   onClick: PropTypes.func,
+//   className: PropTypes.string,
+//   disabled: PropTypes.bool,
+// };
 export default Button;

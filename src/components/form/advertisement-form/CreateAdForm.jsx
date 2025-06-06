@@ -5,7 +5,7 @@ import TargetingOptions from "./TargetingOptions";
 import AdScheduling from "./AdScheduling";
 import BiddingBudget from "./BiddingBudget";
 import { useForm, FormProvider } from "react-hook-form";
-import RingLoader from "react-spinners/RingLoader";
+import MoonLoader from "react-spinners/MoonLoader";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createCampaign } from "../../../redux/slices/campaignSlice";
@@ -27,15 +27,23 @@ const CreateAdForm = () => {
   if (loading) {
     return (
       <div className="text-center py-10">
-        <p className="text-blue-500 text-3xl dark:text-gray-400">Creating campaign...</p>
+        <p className="text-blue-500 text-3xl dark:text-gray-400">
+          Creating Campaign...
+        </p>
         <div className="flex justify-center items-center h-64">
-          <RingLoader
+          {/* <RingLoader
           color="#1d2189"
           cssOverride={{}}
           size={200}
           speedMultiplier={1}
           className="flex justify-center items-center mt-4"
-        />
+        /> */}
+          <MoonLoader
+            color="#5F7C95"
+            size={100}
+            speedMultiplier={1}
+            className="flex justify-center items-center mt-4"
+          />
         </div>
       </div>
     );
@@ -61,16 +69,16 @@ const CreateAdForm = () => {
           <div className="flex justify-end mt-2 gap-3">
             <button
               type="button"
-              className="bg-white border border-red-500 text-red-500 px-4 py-2"
+              className="bg-white border border-red-500 text-red-500 px-4 py-2 rounded-md"
             >
               Save as Draft
             </button>
             <button
               type="submit"
-              className="bg-blue-600 text-white px-4 py-2"
+              className="bg-blue-600 text-white px-4 py-2 rounded-md"
               disabled={methods.formState.isSubmitting}
             >
-              Submit
+              Submit For Review
             </button>
           </div>
         </form>

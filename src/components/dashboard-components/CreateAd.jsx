@@ -12,7 +12,7 @@ const CreateAd = () => {
       </div>
       <div className="w-full flex justify-end">
       <Link to = "/advertisement/create-ad">
-        <Button size="cs">Create Ad</Button>
+        <Button size="cs">Add Campaign</Button>
         </Link>
       </div>
     </div>

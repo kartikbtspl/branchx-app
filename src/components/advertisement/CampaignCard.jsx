@@ -1,7 +1,9 @@
 import { ExternalLink, RefreshCw, Settings2 } from "lucide-react";
 import MediaPlayer from "../video/MediaPlayer";
+import { Link } from "react-router";
 
 const CampaignCard = ({
+  id,
   campaignName,
   campaignObjective,
   isApproved,
@@ -36,12 +38,14 @@ const CampaignCard = ({
 
         {/* Info */}
         <div className="flex-1 space-y-1 ">
+          <Link to = {`/campaign/${id}`}>
           <div className="flex items-center justify-between">
             <div className="text-xl font-semibold text-gray-900">{campaignName}</div>
             <a href="#" target="_blank" rel="noopener noreferrer">
               <ExternalLink size={18} className="text-gray-400 hover:text-blue-500" />
             </a>
           </div>
+          </Link>
 
           <div className="text-sm text-gray-600 flex items-center gap-1">
             Approval Status:
@@ -63,10 +67,10 @@ const CampaignCard = ({
             <span className="text-gray-800 font-medium">{scheduleDate}</span> ({timeSlot})
           </div>
 
-          <div className="text-sm text-blue-600 mt-1 flex items-center gap-1">
+          {/* <div className="text-sm text-blue-600 mt-1 flex items-center gap-1">
             <RefreshCw size={14} />
             {campaignObjective}
-          </div>
+          </div> */}
         </div>
       </div>
 

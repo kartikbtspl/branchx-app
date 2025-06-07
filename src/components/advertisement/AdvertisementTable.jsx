@@ -60,7 +60,7 @@ const AdvertisementTable = () => {
   return (
     <div>
       <div>
-        <h1 className="font-bold text-blue-700 text-2xl text mb-4">
+        <h1 className="font-bold  mb-4">
           Campaigns
         </h1>
       </div>

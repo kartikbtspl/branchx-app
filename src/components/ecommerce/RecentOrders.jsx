@@ -14,23 +14,6 @@ const adsData = [
   { id: "#804", regions: "560076, 560024, 560024, +12", views: "Rs 1,99,567" },
 ];
 
-// const columns = [{
-//   id  : "id",
-//   header: "Ad ID", 
-//   accessorKey: "id",
-//   cell: ({ row }) => ()<span className="text-gray-800">{row.id}-_</span>,
-  
-  
-// }]
-// <Table
-//  id="recent-orders"
-//  className="w-full bg-white rounded-lg shadow-md"
-//  data 
-//  columns=[columns]
-//  defaultSort={{ field: "id", direction: "asc" }
-//  loading=
-
-// />
 export default function RecentOrders() {
   return (
      <div className="p-4">

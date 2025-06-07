@@ -2,11 +2,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Link } from "react-router";
 
-// Spinner Component
+
 const Spinner = ({ size = "sm", className = "" }) => (
   <svg
-    className={`animate-spin ${size === "sm" ? "w-4 h-4" : "w-6 h-6"} text-white ${className}`}
+    className={`animate-spin ${
+      size === "sm" ? "w-4 h-4" : "w-6 h-6"
+    } text-white ${className}`}
     fill="none"
     viewBox="0 0 24 24"
   >
@@ -49,7 +52,6 @@ const SignInForm = () => {
       setLoading(false);
     }
   };
-
 
   const renderAdditionalInput = () => {
     switch (selectedRole) {
@@ -97,7 +99,7 @@ const SignInForm = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Section */}
-      <div className="bg-gradient-to-br from-blue-800 to-blue-600 text-white w-[35%] p-10 flex flex-col justify-center">
+      <div className="bg-gradient-to-br from-[#5b5f8f] to-[#5F7C95] text-white w-[35%] p-10 flex flex-col justify-center">
         <h1 className="text-4xl font-bold mb-6">
           Expand Fast
           <br />
@@ -138,16 +140,13 @@ const SignInForm = () => {
       <div className="flex flex-col w-[65%] justify-center items-center px-8 py-12">
         <img
           src="/images/logo/bx-logo.svg"
-          alt="Xpandifi Logo"
-          className="h-12 mb-4"
+          alt="Branch-X Logo"
+          className="h-12 mb-3"
         />
-        <h2 className="text-2xl font-semibold text-gray-800 mb-1">
-          Welcome Back to Branch-X
+        <h2 className="text-2xl font-semibold text-gray-800 mb-5">
+          Welcome to Ads Monetization
         </h2>
-        <p className="text-sm text-gray-500 mb-6">
-          Log in to manage your global retail operations.
-        </p>
-
+        {/* <br /> */}
         <form
           className="lg:w-1/2 space-y-3"
           onSubmit={handleSubmit(onSubmit)}
@@ -185,33 +184,39 @@ const SignInForm = () => {
             </div>
             <div>
               <label className="block text-sm">Country</label>
-              <input
-                type="text"
-                placeholder="Country"
+              <select
                 className="border p-2 w-full"
-                required
                 {...register("country", { required: true })}
-              />
+              >
+                <option value="">Select Country</option>
+                <option value="India">India</option>
+              </select>
             </div>
             <div>
-              <label className="block text-sm">State</label>
-              <input
-                type="text"
-                placeholder="State"
+               <label className="block text-sm">State</label>
+              <select
                 className="border p-2 w-full"
-                required
                 {...register("state", { required: true })}
-              />
+              >
+                <option value="">Select State</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Goa">Goa</option>
+                <option value="Panjab">Panjab</option>
+              </select>
             </div>
             <div>
               <label className="block text-sm">City</label>
-              <input
-                type="text"
-                placeholder="City"
+              <select
                 className="border p-2 w-full"
-                required
                 {...register("city", { required: true })}
-              />
+              >
+                <option value="">Select City</option>
+                <option value="Pune">Pune</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Banglore">Banglore</option>
+                <option value="Chennai">Chennai</option>
+              </select>
             </div>
             <div>
               <label className="block text-sm">Role</label>
@@ -221,7 +226,7 @@ const SignInForm = () => {
               >
                 <option value="">Choose</option>
                 <option value="Advertiser">Advertiser</option>
-                <option value="Distributer">Distributor</option>
+                {/* <option value="Distributer">Distributor</option> */}
                 <option value="Retailer">Retailer</option>
               </select>
             </div>
@@ -238,15 +243,23 @@ const SignInForm = () => {
           <button
             type="submit"
             disabled={formState.isSubmitting}
-            className={`bg-blue-600 text-white py-2 px-6 w-full mt-2 flex items-center justify-center gap-2 ${
+            className={`bg-[#5F7C95] text-white py-2 px-6 w-full mt-2 flex items-center justify-center gap-2 ${
               formState.isSubmitting
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-teal-700"
+                ? "bg-[#5F7C95] cursor-not-allowed"
+                : "bg-[#5F7C95] hover:bg-[#445E94]"
             }`}
           >
             {formState.isSubmitting && <Spinner size="sm" />}
             {formState.isSubmitting ? "Submitting" : "Send"}
           </button>
+          <div className="text-right">
+            <Link
+              to="/signin"
+              className="text-sm text-blue-600 hover:underline"
+            >
+              Back to the login
+            </Link>
+          </div>
         </form>
       </div>
     </div>
@@ -254,4 +267,3 @@ const SignInForm = () => {
 };
 
 export default SignInForm;
-

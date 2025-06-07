@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginUser } from "../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 // Spinner Component
 const Spinner = ({ size = "sm", className = "" }) => (
@@ -41,9 +41,7 @@ const SignInForm = () => {
     setLoading(true)
     try{
       const response = await dispatch(loginUser(data));
-     
       console.log("Login response:", response?.payload?.data?.token);
-
       if (response?.payload?.data?.token) {
         localStorage.setItem("token", response?.payload?.data?.token);
       }
@@ -57,26 +55,6 @@ const SignInForm = () => {
       setLoading(false);
     }
   }
-
-  // const onSubmit = async (data) => {
-  //   setLoading(true);
-  //   dispatch(loginUser(data))
-  //     .unwrap()
-  //     .then((res) => {
-  //       console.log("Login response:", res);
-  //       if (res?.data?.token) {
-  //         localStorage.setItem("token", res?.data?.token);
-  //       }
-  //       console.log(res);
-  //       navigate("/");
-  //     })
-  //     .catch(() => {
-  //       console.log("Login failed");
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -202,8 +180,8 @@ const SignInForm = () => {
             disabled={isSubmitting || loading}
             className={`w-full py-2 flex justify-center items-center gap-2 text-white rounded-full transition ${
               isSubmitting || loading
-                ? "bg-[#445E94] cursor-not-allowed"
-                : "bg-[#445E94] hover:bg-[#5F7C95]"
+                ? "bg-[#5F7C95] cursor-not-allowed"
+                : "bg-[#5F7C95] hover:bg-[#445E94]"
             }`}
           >
             {isSubmitting || loading ? <Spinner /> : null}
@@ -219,9 +197,9 @@ const SignInForm = () => {
 
         <p className="text-sm text-gray-500 mt-8">
           Don't have a Branch-X account?{" "}
-          <a href="#" className="text-blue-600 hover:underline">
+          <Link to="/contact-us" className="text-blue-600 hover:underline">
             Contact Us
-          </a>
+          </Link>
         </p>
       </div>
     </div>

@@ -78,8 +78,6 @@ export default function App() {
             <Route path="/campaigns" element={<CampaignCard />} />
             <Route path = "/campaign/:id" element={<CampaignDetails />} />
 
-
-
             {/* Distributor */}
             <Route path="/distributor" element={<DistributorDashboard/>} />
           </Route>

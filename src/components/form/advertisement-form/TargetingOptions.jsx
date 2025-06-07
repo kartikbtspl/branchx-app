@@ -74,27 +74,6 @@ const TargetingOptions = () => {
               )}
             />
           </div>
-
-          {/* Age Group */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Age Group
-            </label>
-            <div className="flex flex-wrap gap-4">
-              {ageOptions.map((age) => (
-                <label key={age} className="flex items-center gap-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={ageGroups.includes(age)}
-                    onChange={() =>
-                      toggleSelection(age, ageGroups, "ageGroups")
-                    }
-                  />
-                  {age}
-                </label>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Right side */}

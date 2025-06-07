@@ -100,7 +100,7 @@ const SignInForm = () => {
       <div className="flex flex-col w-[65%] justify-center items-center px-8 py-12">
         <img src="/images/logo/bx-logo.svg" alt="Xpandifi Logo" className="h-12 mb-4" />
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-          Welcome Back to Branch-X
+          Welcome To Ad-Monetization Platform
         </h2>
         {/* <p className="text-sm text-gray-500 mb-6">
           Log in to manage your global retail operations.
@@ -166,7 +166,6 @@ const SignInForm = () => {
             >
               <option value="">Select your role</option>
               <option value="Retailer">Retailer</option>
-              <option value="Distributor">Distributor</option>
               <option value="Advertiser">Advertiser</option>
             </select>
             {errors.role && (

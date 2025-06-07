@@ -5,7 +5,7 @@ import { Link } from "react-router";
 const CampaignCard = ({
   id,
   campaignName,
-  campaignObjective,
+  
   isApproved,
   isPayment,
   status,
@@ -26,7 +26,7 @@ const CampaignCard = ({
   
         <div className="w-56 h-36 rounded-lg overflow-hidden flex items-center justify-center">
           {isVideo ? (
-            <MediaPlayer src={creativeFile} previewOnly />
+            <MediaPlayer src={creativeFile}  previewOnly />
           ) : (
             <img
               src={creativeFile}

@@ -98,7 +98,10 @@ const MediaPlayer = ({ src, previewOnly = false }) => {
     );
   }
 
-  return <div>Unsupported media format</div>;
+  return <div>
+    <img src = "https://www.google.com/imgres?q=food%20image&imgurl=https%3A%2F%2Fimg.freepik.com%2Ffree-photo%2Ftop-view-table-full-food_23-2149209253.jpg%3Fsemt%3Dais_items_boosted%26w%3D740&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Fphotos%2Ffood&docid=RB__2DxE3HJa8M&tbnid=fsEDLp6NGRf7dM&vet=12ahUKEwif1Y7RhN-NAxXwm2MGHXbkGkYQM3oECFMQAA..i&w=740&h=493&hcb=2&ved=2ahUKEwif1Y7RhN-NAxXwm2MGHXbkGkYQM3oECFMQAA"
+          alt = "Thumbnail" />
+  </div>;
 };
 
 export default MediaPlayer;

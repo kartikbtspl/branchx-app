@@ -40,7 +40,7 @@ const CampaignCard = ({
         <div className="flex-1 space-y-1 ">
           <Link to = {`/campaign/${id}`}>
           <div className="flex items-center justify-between">
-            <div className="text-xl font-semibold text-gray-900">{campaignName}</div>
+            <div className="text-md font-semibold text-gray-900">{campaignName}</div>
             <a href="#" target="_blank" rel="noopener noreferrer">
               <ExternalLink size={18} className="text-gray-400 hover:text-blue-500" />
             </a>

@@ -195,9 +195,9 @@ const SignInForm = () => {
         </form>
 
         <p className="text-sm text-gray-500 mt-8">
-          Don't have a Branch-X account?{" "}
+          Don't have a Ads monetization account?{" "}
           <Link to="/contact-us" className="text-blue-600 hover:underline">
-            Contact Us
+            Register here
           </Link>
         </p>
       </div>

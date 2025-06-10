@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const Spinner = ({ size = "sm", className = "" }) => (
   <svg
@@ -65,7 +66,7 @@ const SignInForm = () => {
             className={inputInner}
             placeholder={
               selectedRole === "Advertiser"
-                ? "Enter your company name"
+                ? "Legal name as per GST certificate"
                 : selectedRole === "Retailer"
                 ? "Enter your shop name"
                 : "Enter the region you cover"
@@ -82,7 +83,7 @@ const SignInForm = () => {
       {/* Left Section */}
       <div className="bg-gradient-to-br from-[#5b5f8f] to-[#5F7C95] text-white w-[35%] p-10 flex flex-col justify-center">
         <h1 className="text-4xl font-bold mb-6">Expand Fast<br />Sell Globally</h1>
-        <div className="space-y-6">
+        <div className="space-y-12">
           <div className="flex items-start space-x-3">
             <div className="text-2xl">📦</div>
             <div>
@@ -113,7 +114,7 @@ const SignInForm = () => {
         <h2 className="text-2xl font-semibold text-gray-800 mb-5">Welcome to Ads Monetization</h2>
 
         <form
-          className="lg:w-1/2 space-y-3"
+          className="lg:w-3/4 space-y-4"
           onSubmit={handleSubmit(onSubmit)}
           autoComplete="off"
         >
@@ -159,8 +160,8 @@ const SignInForm = () => {
             <div className="col-span-1 md:col-span-2">{renderAdditionalInput()}</div>
           </div>
 
-          <label className="block text-sm mt-2">Message</label>
-          <div className={inputWrapper}>
+          <label className="text-sm">Message</label>
+          <div className={inputWrapper}>  
             <input
               placeholder="Message"
               className={`${inputInner} h-20 resize-none`}
@@ -171,7 +172,7 @@ const SignInForm = () => {
           <button
             type="submit"
             disabled={formState.isSubmitting}
-            className={`bg-[#5F7C95] text-white py-2 px-6 w-full mt-2 flex items-center justify-center gap-2 ${
+            className={`bg-[#5F7C95] text-white py-2 px-6 w-full rounded-xl mt-2 flex items-center justify-center gap-2 ${
               formState.isSubmitting ? "cursor-not-allowed" : "hover:bg-[#445E94]"
             }`}
           >

@@ -6,13 +6,18 @@ import {
 } from "../../redux/slices/campaignSlice";
 import CampaignCard from "./CampaignCard";
 import MoonLoader from "react-spinners/MoonLoader";
+// import log from "video.js/dist/types/utils/log";
 
 const AdvertisementTable = () => {
   const dispatch = useDispatch();
   const { campaigns, loading } = useSelector((state) => state.campaign);
+  console.log("Campaigns data:", campaigns);
+  console.log("Loading state:", loading);
 
   useEffect(() => {
-    dispatch(fetchCampaigns());
+    if (!campaigns || campaigns.length === 0) {
+      dispatch(fetchCampaigns());
+    }
   }, [dispatch]);
 
   const handleToggle = (id, currentStatus) => {
@@ -60,12 +65,10 @@ const AdvertisementTable = () => {
   return (
     <div>
       <div>
-        <h1 className="font-bold  mb-4">
-          Campaigns
-        </h1>
+        <h1 className="font-bold  mb-4">Campaigns</h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
-        {campaigns.map((campaign) => (
+        {campaigns?.data?.map((campaign) => (
           <CampaignCard
             key={campaign.id}
             id={campaign.id}

@@ -15,6 +15,7 @@ const CampaignDetails = () => {
           `https://branchx-backend-api-4.onrender.com/api/v1/campaign/${id}/getCampaign`,
           { withCredentials: true }
         );
+        console.log("Campaign data fetched successfully:", response);
         setCampaign(response.data.campaign);
       } catch (error) {
         console.error("Failed to fetch campaign:", error);

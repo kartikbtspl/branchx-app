@@ -43,7 +43,7 @@ export const createCampaignAPI = async (data) => {
 
 export const getCampaignsAPI = async () => {
   const token = localStorage.getItem("token");
-  const response = await axiosInstance.get("/api/v1/campaign/getCampaigns", {
+  const response = await axiosInstance.get("api/v1/campaign/getUserCampaign", {
     withCredentials: true,
     headers: {
       "Content-Type": "application/json",

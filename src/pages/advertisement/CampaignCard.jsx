@@ -5,7 +5,6 @@ import { Link } from "react-router";
 const CampaignCard = ({
   id,
   campaignName,
-  
   isApproved,
   isPayment,
   status,

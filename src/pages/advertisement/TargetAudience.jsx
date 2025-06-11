@@ -1,4 +1,4 @@
-import Input from "../form/input/InputField";
+import Input from "../../components/form/input/InputField";
 
 const TargetAudience = () => {
   return (

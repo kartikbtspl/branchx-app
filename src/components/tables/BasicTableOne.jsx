@@ -4,8 +4,8 @@ import {
   TableCell,
   TableHeader,
   TableRow,
-} from "../../ui/table";
-import Badge from "../../ui/badge/Badge";
+} from "../ui/table";
+import Badge from "../ui/badge/Badge";
 
 const tableData = [
   {

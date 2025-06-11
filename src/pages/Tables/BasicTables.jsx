@@ -1,4 +1,4 @@
-import BasicTableOne from "../../components/tables/BasicTables/BasicTableOne";
+import BasicTableOne from "../../components/tables/BasicTableOne";
 
 export default function BasicTables() {
   return (

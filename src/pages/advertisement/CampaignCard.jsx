@@ -1,5 +1,5 @@
 import { ExternalLink, RefreshCw, Settings2 } from "lucide-react";
-import MediaPlayer from "../video/MediaPlayer";
+import MediaPlayer from "../../components/video/MediaPlayer";
 import { Link } from "react-router";
 
 const CampaignCard = ({

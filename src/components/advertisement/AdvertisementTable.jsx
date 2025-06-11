@@ -6,7 +6,7 @@ import {
 } from "../../redux/slices/campaignSlice";
 import CampaignCard from "./CampaignCard";
 import MoonLoader from "react-spinners/MoonLoader";
-// import log from "video.js/dist/types/utils/log";
+
 
 const AdvertisementTable = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const AdvertisementTable = () => {
     if (!campaigns || campaigns.length === 0) {
       dispatch(fetchCampaigns());
     }
-  }, [dispatch]);
+  }, [campaigns, dispatch]);
 
   const handleToggle = (id, currentStatus) => {
     dispatch(toggleCampaignStatus({ id, status: !currentStatus }));
@@ -26,7 +26,7 @@ const AdvertisementTable = () => {
 
   const handleReconfigure = (id) => {
     console.log("Reconfigure clicked for campaign ID:", id);
-    // you can navigate to an edit form if needed
+    
   };
 
   if (loading) {
@@ -36,13 +36,7 @@ const AdvertisementTable = () => {
           Loading Campaigns...
         </p>
         <div className="flex justify-center items-center h-64">
-          {/* <RingLoader
-            color="#1d2189"
-            cssOverride={{}}
-            size={200}
-            speedMultiplier={1}
-            className="flex justify-center items-center mt-4"
-          /> */}
+          
           <MoonLoader
             color="#5F7C95"
             size={100}

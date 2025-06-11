@@ -8,13 +8,13 @@ import AppLayout from "./layout/AppLayout";
 import Home from "./pages/Dashboard/Home";
 import AdDetails from "./pages/Dashboard/AdDetails";
 import Login from "./components/form/Login";
-import ContactForm from "./components/others/ContactForm";
-import CreateAdForm from "./components/form/advertisement-form/CreateAdForm";
+import ContactForm from "./pages/Forms/contact-us/ContactForm";
+import CreateAdForm from "./pages/Forms/advertisement-form/CreateAdForm";
 import { ToastContainer } from "react-toastify";
-import AdvertisementTable from "./components/advertisement/AdvertisementTable";
-import CampaignCard from "./components/advertisement/CampaignCard";
+import AdvertisementTable from "./pages/advertisement/AdvertisementTable";
+import CampaignCard from "./pages/advertisement/CampaignCard";
 import DistributorDashboard from "./components/distributor/DistributorDashboard";
-import CampaignDetails from "./components/advertisement/CampaignDetails";
+import CampaignDetails from "./pages/advertisement/CampaignDetails";
 
 export default function App() {
   return (

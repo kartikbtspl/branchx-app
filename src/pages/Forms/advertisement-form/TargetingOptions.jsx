@@ -4,27 +4,29 @@ import { indianCities } from "../../../utils/ad-campaign-data/cities";
 
 const TargetingOptions = () => {
   const {
-    register,
     setValue,
-    watch,
+    register,
     control,
     formState: { errors },
   } = useFormContext();
 
-  const ageGroups = watch("ageGroups") || [];
+  const adDeviceOptions = [
+    { name: "Cube", price: 1500 },
+    { name: "TV", price: 5000 },
+    { name: "Billboard", price: 3000 },
+    { name: "Mobile App", price: 1000 },
+    { name: "Website", price: 1200 },
+  ];
 
-  const toggleSelection = (value, list, fieldName) => {
-    if (list.includes(value)) {
-      setValue(
-        fieldName,
-        list.filter((v) => v !== value)
-      );
-    } else {
-      setValue(fieldName, [...list, value]);
-    }
-  };
+  const productTypeOptions = [
+    { name: "Fresh Produce", price: 200 },
+    { name: "Dairy Products", price: 300 },
+    { name: "Packaged Snacks", price: 250 },
+    { name: "Frozen Foods", price: 400 },
+    { name: "Juices", price: 350 },
+    { name: "Canned Goods", price: 275 },
+  ];
 
-  const ageOptions = ["16-24", "25-35", "35-50", "50+"];
   const demographicOptions = [
     "Gender",
     "Purchase Behavior",
@@ -32,15 +34,6 @@ const TargetingOptions = () => {
     "Education Level",
     "Occupation",
     "Interests",
-  ];
-  const adDeviceOptions = ["Cube", "TV", "Billboard", "Mobile App", "website"];
-  const productTypeOptions = [
-    "Fresh Produce",
-    "Dairy Products",
-    "Packaged Snacks",
-    "Frozen Foods",
-    "Juices",
-    "Canned Goods",
   ];
 
   return (
@@ -63,9 +56,7 @@ const TargetingOptions = () => {
                   multiple
                   options={indianCities}
                   getOptionLabel={(option) => option.name}
-                  isOptionEqualToValue={(option, value) =>
-                    option.id === value.id
-                  }
+                  isOptionEqualToValue={(option, value) => option.id === value.id}
                   value={value}
                   onChange={(event, newValue) => onChange(newValue)}
                   renderInput={(params) => (
@@ -81,29 +72,37 @@ const TargetingOptions = () => {
               )}
             />
           </div>
-           {/* Product Type */}
+
+          {/* Product Type (store full object) */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Product Type
             </label>
-            <select
-              {...register("productType", {
-                required: "Please select a product type",
-              })}
-              className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:ring focus:border-blue-400"
-            >
-              <option value="">Select Product</option>
-              {productTypeOptions.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-            {errors.productType && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.productType.message}
-              </p>
-            )}
+            <Controller
+              name="productType"
+              control={control}
+              rules={{ required: "Please select a product type" }}
+              render={({ field: { onChange, value } }) => (
+                <Autocomplete
+                  options={productTypeOptions}
+                  getOptionLabel={(option) => option.name}
+                  isOptionEqualToValue={(option, value) =>
+                    option.name === value.name
+                  }
+                  value={value}
+                  onChange={(event, newValue) => onChange(newValue)}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder="Select Product Type"
+                      error={!!errors.productType}
+                      helperText={errors.productType?.message}
+                      size="small"
+                    />
+                  )}
+                />
+              )}
+            />
           </div>
         </div>
 
@@ -127,7 +126,7 @@ const TargetingOptions = () => {
             </select>
           </div>
 
-          {/* Ad Device Show - MULTI SELECT using Autocomplete */}
+          {/* Ad Device Show (multi-select + object) */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Ad Device Show
@@ -141,6 +140,10 @@ const TargetingOptions = () => {
                 <Autocomplete
                   multiple
                   options={adDeviceOptions}
+                  getOptionLabel={(option) => option.name}
+                  isOptionEqualToValue={(option, value) =>
+                    option.name === value.name
+                  }
                   value={value}
                   onChange={(event, newValue) => onChange(newValue)}
                   renderInput={(params) => (
@@ -165,7 +168,6 @@ const TargetingOptions = () => {
 export default TargetingOptions;
 
 
-
 // import { useFormContext, Controller } from "react-hook-form";
 // import { Autocomplete, TextField } from "@mui/material";
 // import { indianCities } from "../../../utils/ad-campaign-data/cities";
@@ -174,14 +176,22 @@ export default TargetingOptions;
 //   const {
 //     register,
 //     setValue,
-//     watch,
 //     control,
 //     formState: { errors },
 //   } = useFormContext();
 
-//   const ageGroups = watch("ageGroups") || [];
+//   // const toggleSelection = (value, list, fieldName) => {
+//   //   if (list.includes(value)) {
+//   //     setValue(
+//   //       fieldName,
+//   //       list.filter((v) => v !== value)
+//   //     );
+//   //   } else {
+//   //     setValue(fieldName, [...list, value]);
+//   //   }
+//   // };
 
-//   const toggleSelection = (value, list, fieldName) => {
+//   const toggleSelection = (value, list = [], fieldName) => {
 //     if (list.includes(value)) {
 //       setValue(
 //         fieldName,
@@ -192,7 +202,6 @@ export default TargetingOptions;
 //     }
 //   };
 
-//   const ageOptions = ["16-24", "25-35", "35-50", "50+"];
 //   const demographicOptions = [
 //     "Gender",
 //     "Purchase Behavior",
@@ -201,14 +210,21 @@ export default TargetingOptions;
 //     "Occupation",
 //     "Interests",
 //   ];
-//   const adDeviceOptions = ["Cube", "TV", "Billboard", "Mobile App", "website"];
+//   const adDeviceOptions = [
+//     { name: "Cube", price: 1500 },
+//     { name: "TV", price: 5000 },
+//     { name: "Billboard", price: 3000 },
+//     { name: "Mobile App", price: 1000 },
+//     { name: "website", price: 1200 },
+//   ];
+
 //   const productTypeOptions = [
-//     "Fresh Produce",
-//     "Dairy Products",
-//     "Packaged Snacks",
-//     "Frozen Foods",
-//     "Juices",
-//     "Canned Goods",
+//     { name: "Fresh Produce", price: 200 },
+//     { name: "Dairy Products", price: 300 },
+//     { name: "Packaged Snacks", price: 250 },
+//     { name: "Frozen Foods", price: 400 },
+//     { name: "Juices", price: 350 },
+//     { name: "Canned Goods", price: 275 },
 //   ];
 
 //   return (
@@ -262,8 +278,8 @@ export default TargetingOptions;
 //             >
 //               <option value="">Select Product</option>
 //               {productTypeOptions.map((type) => (
-//                 <option key={type} value={type}>
-//                   {type}
+//                 <option key={type.name} value={type.name}>
+//                   {type.name}
 //                 </option>
 //               ))}
 //             </select>
@@ -295,29 +311,38 @@ export default TargetingOptions;
 //             </select>
 //           </div>
 
-//           {/* Ad Device Show */}
+//           {/* Ad Device Show - MULTI SELECT using Autocomplete */}
 //           <div>
 //             <label className="block text-sm font-medium text-gray-700 mb-1">
 //               Ad Device Show
 //             </label>
-//             <select
-//               {...register("adDeviceShow", {
-//                 required: "Please select a device type",
-//               })}
-//               className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:ring focus:border-blue-400"
-//             >
-//               <option value="">Select Device</option>
-//               {adDeviceOptions.map((device) => (
-//                 <option key={device} value={device}>
-//                   {device}
-//                 </option>
-//               ))}
-//             </select>
-//             {errors.adDeviceShow && (
-//               <p className="text-red-500 text-sm mt-1">
-//                 {errors.adDeviceShow.message}
-//               </p>
-//             )}
+//             <Controller
+//               name="adDeviceShow"
+//               control={control}
+//               defaultValue={[]}
+//               rules={{ required: "Please select at least one device" }}
+//               render={({ field: { onChange, value } }) => (
+//                 <Autocomplete
+//                   multiple
+//                   options={adDeviceOptions}
+//                   getOptionLabel={(option) => option.name}
+//                   isOptionEqualToValue={(option, value) =>
+//                     option.name === value.name
+//                   }
+//                   value={value}
+//                   onChange={(event, newValue) => onChange(newValue)}
+//                   renderInput={(params) => (
+//                     <TextField
+//                       {...params}
+//                       placeholder="Select Devices"
+//                       error={!!errors.adDeviceShow}
+//                       helperText={errors.adDeviceShow?.message}
+//                       size="small"
+//                     />
+//                   )}
+//                 />
+//               )}
+//             />
 //           </div>
 //         </div>
 //       </div>
@@ -327,134 +352,3 @@ export default TargetingOptions;
 
 // export default TargetingOptions;
 
-
-
-
-// // import { useFormContext, Controller } from "react-hook-form";
-// // import { Autocomplete, TextField } from "@mui/material";
-// // import { indianCities } from "../../../utils/ad-campaign-data/cities";
-
-// // const TargetingOptions = () => {
-// //   const {
-// //     register,
-// //     setValue,
-// //     watch,
-// //     control,
-// //     formState: { errors },
-// //   } = useFormContext();
-
-// //   const ageGroups = watch("ageGroups") || [];
-
-// //   const toggleSelection = (value, list, fieldName) => {
-// //     if (list.includes(value)) {
-// //       setValue(
-// //         fieldName,
-// //         list.filter((v) => v !== value)
-// //       );
-// //     } else {
-// //       setValue(fieldName, [...list, value]);
-// //     }
-// //   };
-
-// //   const ageOptions = ["16-24", "25-35", "35-50", "50+"];
-// //   const demographicOptions = [
-// //     "Gender",
-// //     "Purchase Behavior",
-// //     "Income Level",
-// //     "Education Level",
-// //     "Occupation",
-// //     "Interests",
-// //   ];
-// //   const adDeviceOptions = ["Cube", "TV", "Billboard" , "Mobile App" , "website"];
-
-// //   return (
-// //     <div className="bg-white w-full max-w-6xl mx-auto p-6 rounded-lg shadow">
-// //       <h2 className="text-lg font-semibold mb-4">Targeting Options</h2>
-// //       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-// //         {/* Left side */}
-// //         <div className="space-y-4">
-// //           {/* Target Regions */}
-// //           <div>
-// //             <label className="block text-sm font-medium text-gray-700 mb-1">
-// //               Target Regions
-// //             </label>
-// //             <Controller
-// //               name="targetRegions"
-// //               control={control}
-// //               defaultValue={[]}
-// //               render={({ field: { onChange, value } }) => (
-// //                 <Autocomplete
-// //                   multiple
-// //                   options={indianCities}
-// //                   getOptionLabel={(option) => option.name}
-// //                   isOptionEqualToValue={(option, value) =>
-// //                     option.id === value.id
-// //                   }
-// //                   value={value}
-// //                   onChange={(event, newValue) => onChange(newValue)}
-// //                   renderInput={(params) => (
-// //                     <TextField
-// //                       {...params}
-// //                       placeholder="Select Regions"
-// //                       error={!!errors.targetRegions}
-// //                       helperText={errors.targetRegions?.message}
-// //                       size="small"
-// //                     />
-// //                   )}
-// //                 />
-// //               )}
-// //             />
-// //           </div>
-// //         </div>
-
-// //         {/* Right side */}
-// //         <div className="space-y-4">
-// //           {/* Demographics */}
-// //           <div>
-// //             <label className="block text-sm font-medium text-gray-700 mb-1">
-// //               Demographics
-// //             </label>
-// //             <select
-// //               {...register("demographic")}
-// //               className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:ring focus:border-blue-400"
-// //             >
-// //               <option value="">Select Demographic</option>
-// //               {demographicOptions.map((option) => (
-// //                 <option key={option} value={option}>
-// //                   {option}
-// //                 </option>
-// //               ))}
-// //             </select>
-// //           </div>
-
-// //           {/* Ad Device Show Dropdown */}
-// //           <div>
-// //             <label className="block text-sm font-medium text-gray-700 mb-1">
-// //               Ad Device Show
-// //             </label>
-// //             <select
-// //               {...register("adDeviceShow", {
-// //                 required: "Please select a device type",
-// //               })}
-// //               className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:ring focus:border-blue-400"
-// //             >
-// //               <option value="">Select Device</option>
-// //               {adDeviceOptions.map((device) => (
-// //                 <option key={device} value={device}>
-// //                   {device}
-// //                 </option>
-// //               ))}
-// //             </select>
-// //             {errors.adDeviceShow && (
-// //               <p className="text-red-500 text-sm mt-1">
-// //                 {errors.adDeviceShow.message}
-// //               </p>
-// //             )}
-// //           </div>
-// //         </div>
-// //       </div>
-// //     </div>
-// //   );
-// // };
-
-// // export default TargetingOptions;

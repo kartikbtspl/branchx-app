@@ -33,6 +33,7 @@
     "flatpickr": "^4.6.13",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.511.0",
+    "path": "^0.12.7",
     "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
     "react-apexcharts": "^1.7.0",
     "react-dnd": "^16.0.1",

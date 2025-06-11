@@ -2,6 +2,10 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import svgr from 'vite-plugin-svgr'
 import tailwindcss from "@tailwindcss/vite";
+import path from "path";
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
 export default defineConfig({
@@ -12,4 +16,9 @@ export default defineConfig({
         namedExport: "ReactComponent",
       },
     })],
+     resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 });

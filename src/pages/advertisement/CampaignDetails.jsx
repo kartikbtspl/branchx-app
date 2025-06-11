@@ -16,7 +16,7 @@ const CampaignDetails = () => {
           { withCredentials: true }
         );
         console.log("Campaign data fetched successfully:", response);
-        setCampaign(response.data.campaign);
+        setCampaign(response.data.data);
       } catch (error) {
         console.error("Failed to fetch campaign:", error);
       }

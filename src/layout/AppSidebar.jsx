@@ -173,7 +173,7 @@ const AppSidebar = () => {
   // Determine which menu items to show based on role
   const getMenuItems = () => {
     switch (role) {
-      case "Advertiser":
+      case "Ad-Agency":
         return advertiserItems;
       case "Distributor":
         return distributorItems;

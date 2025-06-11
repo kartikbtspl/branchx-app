@@ -165,8 +165,8 @@ const SignIn = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
             >
               <option value="">Select your role</option>
+              <option value="Ad-Agency">Ad-Agency</option>
               <option value="Retailer">Retailer</option>
-              <option value="Advertiser">Advertiser</option>
             </select>
             {errors.role && (
               <p className="text-sm text-red-500 mt-1">{errors.role.message}</p>

@@ -108,24 +108,6 @@ const TargetingOptions = () => {
 
         {/* Right side */}
         <div className="space-y-4">
-          {/* Demographics */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Demographics
-            </label>
-            <select
-              {...register("demographic")}
-              className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:ring focus:border-blue-400"
-            >
-              <option value="">Select Demographic</option>
-              {demographicOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-
           {/* Ad Device Show (multi-select + object) */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -158,6 +140,23 @@ const TargetingOptions = () => {
                 />
               )}
             />
+          </div>
+          {/* Demographics */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Demographics
+            </label>
+            <select
+              {...register("demographic")}
+              className="w-full border border-gray-300 rounded-md px-3 py-2.5 text-sm focus:ring focus:border-blue-400"
+            >
+              <option value="">Select Demographic</option>
+              {demographicOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </div>

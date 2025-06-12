@@ -31,7 +31,7 @@ const advertiserItems = [
   {
     icon : <SquarePen />,
     name : "Campaigns",
-    path: "/created-advertisements",
+    path: "/created-campaigns",
   },
   {
     icon: <RetailAnalysis />,

@@ -30,8 +30,8 @@ export const dashboardRoutes = [
     <Route path="/blank" element={<Blank />} />
     <Route path="/basic-tables" element={<BasicTables />} />
     <Route path="/addetails" element={<AdDetails />} />
-    <Route path="/advertisement/create-ad" element={<CreateAdForm />} />
-    <Route path="/created-advertisements" element={<AdvertisementTable />} />
+    <Route path="/campaign/create-campaign" element={<CreateAdForm />} />
+    <Route path="/created-campaigns" element={<AdvertisementTable />} />
     <Route path="/campaigns" element={<CampaignCard />} />
     <Route path="/campaign/:id" element={<CampaignDetails />} />
     <Route path="/distributor" element={<DistributorDashboard />} />

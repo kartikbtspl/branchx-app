@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createCampaign } from "../../../redux/slices/campaignSlice";
 
-const CreateAdForm = () => {
+const Campaign = () => {
   const navigate = useNavigate();
   const methods = useForm();
   const dispatch = useDispatch();
@@ -87,4 +87,4 @@ const CreateAdForm = () => {
   );
 };
 
-export default CreateAdForm;
+export default Campaign;

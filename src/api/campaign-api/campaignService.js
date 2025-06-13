@@ -1,6 +1,5 @@
 import axiosInstance from "../../config/axiosConfig";
 
-
 export const createCampaignAPI = async (data) => {
   const formData = new FormData();
   Object.entries(data).forEach(([key, value]) => {
@@ -51,7 +50,6 @@ export const getCampaignsAPI = async () => {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log("Response from getCampaignsAPI:", response);
   return response.data;
 };
 

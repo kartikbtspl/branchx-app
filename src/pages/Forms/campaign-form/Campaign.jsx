@@ -9,6 +9,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { createCampaign } from "../../../redux/slices/campaignSlice";
+import Loader from "../../../components/loader/Loader";
 
 const Campaign = () => {
   const navigate = useNavigate();
@@ -27,23 +28,11 @@ const Campaign = () => {
   if (loading) {
     return (
       <div className="text-center py-10">
-        <p className="text-blue-500 text-3xl dark:text-gray-400">
+        <p className="text-[#526E95] text-3xl dark:text-gray-400">
           Creating Campaign...
         </p>
         <div className="flex justify-center items-center h-64">
-          {/* <RingLoader
-          color="#1d2189"
-          cssOverride={{}}
-          size={200}
-          speedMultiplier={1}
-          className="flex justify-center items-center mt-4"
-        /> */}
-          <MoonLoader
-            color="#5F7C95"
-            size={100}
-            speedMultiplier={1}
-            className="flex justify-center items-center mt-4"
-          />
+          <Loader />
         </div>
       </div>
     );
@@ -51,7 +40,7 @@ const Campaign = () => {
 
   return (
     <div>
-      <div className="bg-white border w-full p-2">
+      <div className="  w-full p-2">
         <h1 className="font-bold text-2xl">Create Ad Campaign</h1>
       </div>
       <FormProvider {...methods}>

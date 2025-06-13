@@ -5,10 +5,10 @@ import {
   toggleCampaignStatus,
 } from "../../redux/slices/campaignSlice";
 import CampaignCard from "./CampaignCard";
-import MoonLoader from "react-spinners/MoonLoader";
+import Loader from "../../components/loader/Loader";
 
 
-const AdvertisementTable = () => {
+const UserCampaigns = () => {
   const dispatch = useDispatch();
   const { campaigns, loading } = useSelector((state) => state.campaign);
   console.log("Campaigns data:", campaigns);
@@ -32,18 +32,14 @@ const AdvertisementTable = () => {
   if (loading) {
     return (
       <div className="text-center py-10">
-        <p className="text-blue-500 text-3xl dark:text-gray-400">
+
+         <p className="text-[#526E95] text-center text-3xl dark:text-gray-400">
           Loading Campaigns...
         </p>
-        <div className="flex justify-center items-center h-64">
-          
-          <MoonLoader
-            color="#5F7C95"
-            size={100}
-            speedMultiplier={1}
-            className="flex justify-center items-center mt-4"
-          />
+        <div className="flex h-64">  
+         <Loader />
         </div>
+
       </div>
     );
   }
@@ -59,7 +55,7 @@ const AdvertisementTable = () => {
   return (
     <div>
       <div>
-        <p className="font-bold text-2xl mb-4">Campaigns</p>
+        <h1 className="font-bold  mb-4">Campaigns</h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
         {campaigns?.data?.map((campaign) => (
@@ -83,4 +79,5 @@ const AdvertisementTable = () => {
   );
 };
 
-export default AdvertisementTable;
+export default UserCampaigns;
+

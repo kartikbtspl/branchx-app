@@ -8,10 +8,11 @@ import Home from "@/pages/Dashboard/Home";
 import UserProfiles from "@/pages/UserProfiles";
 import Blank from "@/pages/Blank";
 import Campaign from "@/pages/Forms/campaign-form/Campaign";
-import AdvertisementTable from "@/pages/advertisement/AdvertisementTable";
+
 import CampaignCard from "@/pages/advertisement/CampaignCard";
 import CampaignDetails from "@/pages/advertisement/CampaignDetails";
 import DistributorDashboard from "@/components/distributor/DistributorDashboard";
+import UserCampaigns from "@/pages/advertisement/UserCampaigns";
 
 export const dashboardRoutes = [
   <Route
@@ -26,7 +27,7 @@ export const dashboardRoutes = [
     <Route path="/profile" element={<UserProfiles />} />
     <Route path="/blank" element={<Blank />} />
     <Route path="/campaign/create-campaign" element={<Campaign />} />
-    <Route path="/created-campaigns" element={<AdvertisementTable />} />
+    <Route path="/created-campaigns" element={<UserCampaigns />} />
     <Route path="/campaigns" element={<CampaignCard />} />
     <Route path="/campaign/:id" element={<CampaignDetails />} />
     <Route path="/distributor" element={<DistributorDashboard />} />

@@ -154,7 +154,14 @@ export default function UserDropdown() {
               fill=""
             />
           </svg>
-          Sign out
+          <button
+            type="button"
+            onClick={() => localStorage.removeItem("token")}
+            tabIndex={0}
+            aria-label="Logout"
+          >
+            Logout
+          </button>
         </Link>
       </Dropdown>
     </div>

@@ -45,10 +45,7 @@ const CampaignCard = ({
               <div className="text-md font-semibold text-gray-900">
                 {campaignName}
               </div>
-              <ExternalLink
-                size={18}
-                className="text-gray-400 hover:text-blue-500"
-              />
+              
             </div>
           </Link>
 
@@ -75,7 +72,6 @@ const CampaignCard = ({
         </div>
       </div>
 
-      {/* Bottom Row: Reconfigure + Toggle */}
       <div className="flex items-center justify-between">
         <button
           onClick={onReconfigure}

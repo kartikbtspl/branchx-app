@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { estimatePrice } from "../../../api/campaign-api/targetingOptionService";
 
+let debounceTimeout;
+
 const BiddingBudget = () => {
   const {
     register,
@@ -13,33 +15,40 @@ const BiddingBudget = () => {
   const targetRegions = useWatch({ control, name: "targetRegions" }) || [];
   const adDeviceShow = useWatch({ control, name: "adDeviceShow" }) || [];
   const productType = useWatch({ control, name: "productType" });
-  const numberOfDevices = useWatch({ control, name: "numberOfDevices" }) || 100;
 
   const [estimatedPrice, setEstimatedPrice] = useState(0);
 
   useEffect(() => {
-    const fetchEstimatedPrice = async () => {
-      if (!targetRegions.length || !adDeviceShow.length || !productType) return;
+    clearTimeout(debounceTimeout);
 
+    debounceTimeout = setTimeout(async () => {
       try {
         const response = await estimatePrice({
-          targetRegions,
-          adDeviceShow,
-          productType,
-          numberOfDevices,
+          targetRegions: targetRegions.map((r) => (r.name ? r.name : r)),
+          adDevices: adDeviceShow.map((d) => (d.name ? d.name : d)),
+          productType: productType.name || productType,
         });
 
-        setEstimatedPrice(response.estimatedPrice);
-        setValue("baseBid", response.estimatedPrice);
-        setValue("budgetLimit", response.estimatedPrice);
-        setValue("estimatedPrice", response.estimatedPrice);
+        const cost = response?.data?.baseCost || 0;
+        console.log("Estimated Price:", cost);
+
+        setEstimatedPrice(cost);
+        setValue("baseBid", cost);
+        setValue("budgetLimit", cost);
+        setValue("estimatedPrice", cost);
       } catch (err) {
         console.error("Failed to fetch estimated price:", err);
       }
-    };
+    }, 500); // Delay in ms (500ms debounce)
 
-    fetchEstimatedPrice();
-  }, [targetRegions, adDeviceShow, productType, numberOfDevices, setValue]);
+    // Cleanup on unmount or next call
+    return () => clearTimeout(debounceTimeout);
+  }, [
+    JSON.stringify(targetRegions),
+    JSON.stringify(adDeviceShow),
+    JSON.stringify(productType),
+    setValue,
+  ]);
 
   return (
     <div className="w-full bg-white p-6 rounded-lg shadow-md">
@@ -52,7 +61,7 @@ const BiddingBudget = () => {
           </label>
           <input
             type="number"
-            {...register("baseBid", { required: "Base Bid is required" })}
+            {...register("baseCost", { required: "Base cost is required" })}
             className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-400"
           />
           {errors.baseBid && (
@@ -77,10 +86,4 @@ const BiddingBudget = () => {
 };
 
 export default BiddingBudget;
-
-
-
-
-
-
 

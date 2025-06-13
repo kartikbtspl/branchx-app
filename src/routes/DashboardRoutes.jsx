@@ -1,4 +1,3 @@
-// src/routes/DashboardRoutes.jsx
 import {
   Route
 } from "react-router-dom";
@@ -8,14 +7,12 @@ import AppLayout from "@/layout/AppLayout";
 import Home from "@/pages/Dashboard/Home";
 import UserProfiles from "@/pages/UserProfiles";
 import Blank from "@/pages/Blank";
-import BasicTables from "@/pages/Tables/BasicTables";
-import AdDetails from "@/pages/Dashboard/AdDetails";
 import Campaign from "@/pages/Forms/campaign-form/Campaign";
 
-import CampaignCard from "@/pages/advertisement/CampaignCard";
-import CampaignDetails from "@/pages/advertisement/CampaignDetails";
+import CampaignCard from "@/pages/campaigns/CampaignCard";
+import CampaignDetails from "@/pages/campaigns/CampaignDetails";
 import DistributorDashboard from "@/components/distributor/DistributorDashboard";
-import UserCampaigns from "@/pages/advertisement/UserCampaigns";
+import UserCampaigns from "@/pages/campaigns/UserCampaigns";
 
 export const dashboardRoutes = [
   <Route
@@ -29,8 +26,6 @@ export const dashboardRoutes = [
     <Route index path="/" element={<Home />} />
     <Route path="/profile" element={<UserProfiles />} />
     <Route path="/blank" element={<Blank />} />
-    <Route path="/basic-tables" element={<BasicTables />} />
-    <Route path="/addetails" element={<AdDetails />} />
     <Route path="/campaign/create-campaign" element={<Campaign />} />
     <Route path="/created-campaigns" element={<UserCampaigns />} />
     <Route path="/campaigns" element={<CampaignCard />} />

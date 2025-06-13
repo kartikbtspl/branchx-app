@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 const CampaignDetails = () => {
@@ -99,7 +99,7 @@ const CampaignDetails = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="mx-auto">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <div>
@@ -406,9 +406,6 @@ const CampaignDetails = () => {
                 </div>
               </div>
             </div>
-
-       
-            
           </div>
         </div>
       </div>

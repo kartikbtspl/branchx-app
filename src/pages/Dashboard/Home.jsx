@@ -1,9 +1,6 @@
 import RecentOrders from "../../components/ecommerce/RecentOrders";
 import CreateAd from "../../components/dashboard-components/CreateAd";
 import NotificationPanel from "../../components/dashboard-components/NotificationPanel";
-import VideoAdsCarousel from "../../components/dashboard-components/VideoAdsCarousel";
-import AdSpendsAnalytics from "../../components/dashboard-components/AdSpendAnalytics";
-import AdsListTable from "../../components/dashboard-components/AdsListTable";
 
 export default function Home() {
   return (
@@ -15,11 +12,6 @@ export default function Home() {
         </div>
         <div className="col-span-12 xl:col-span-5">
           <NotificationPanel />
-        </div>
-        <div className="col-span-12">
-          <VideoAdsCarousel />
-          <AdSpendsAnalytics />
-          <AdsListTable />
         </div>
       </div>
     </>

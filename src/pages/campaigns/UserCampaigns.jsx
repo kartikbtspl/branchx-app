@@ -61,6 +61,7 @@ const UserCampaigns = () => {
         {campaigns?.data?.map((campaign) => (
           <CampaignCard
             key={campaign.id}
+            campaignCode={campaign.campaignCode}
             id={campaign.id}
             campaignName={campaign.campaignName}
             creativeFile={campaign.creativeFile}

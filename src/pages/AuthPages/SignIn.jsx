@@ -102,10 +102,6 @@ const SignIn = () => {
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">
           Welcome To Ad-Monetization Platform
         </h2>
-        {/* <p className="text-sm text-gray-500 mb-6">
-          Log in to manage your global retail operations.
-        </p> */}
-
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full max-w-md space-y-4"

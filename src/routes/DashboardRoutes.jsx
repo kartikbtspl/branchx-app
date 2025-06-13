@@ -9,10 +9,10 @@ import UserProfiles from "@/pages/UserProfiles";
 import Blank from "@/pages/Blank";
 import Campaign from "@/pages/Forms/campaign-form/Campaign";
 
-import CampaignCard from "@/pages/advertisement/CampaignCard";
-import CampaignDetails from "@/pages/advertisement/CampaignDetails";
+import CampaignCard from "@/pages/campaigns/CampaignCard";
+import CampaignDetails from "@/pages/campaigns/CampaignDetails";
 import DistributorDashboard from "@/components/distributor/DistributorDashboard";
-import UserCampaigns from "@/pages/advertisement/UserCampaigns";
+import UserCampaigns from "@/pages/campaigns/UserCampaigns";
 
 export const dashboardRoutes = [
   <Route

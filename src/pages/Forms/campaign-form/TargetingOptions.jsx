@@ -44,25 +44,23 @@ const TargetingOptions = () => {
     fetchDevices();
   }, []);
 
-useEffect(() => {
-  const fetchProductTypes = async () => {
-    try {
-      const products = await productTypes();
-      const productList = Array.isArray(products) ? products : []; 
-      const formatted = productList.map((p) => ({
-        name: p.product_type,
-        price: p.price,
-      }));
-      setProductTypeOptions(formatted);
-      console.log("Formatted product types:", formatted);
-    } catch (err) {
-      console.error("Failed to fetch product types:", err);
-    }
-  };
-
-  fetchProductTypes();
-}, []);
-
+  useEffect(() => {
+    const fetchProductTypes = async () => {
+      try {
+        const products = await productTypes();
+        const formatted = products?.map((p) => ({
+          name: p.product_type,
+          price: p.price,
+        }));
+        setProductTypeOptions(formatted);
+        console.log(formatted)
+     
+      } catch (err) {
+        console.error("Failed to fetch product types:", err);
+      }
+    };
+    fetchProductTypes();
+  }, []);
 
   useEffect(() => {
     const fetchTargetRegions = async () => {

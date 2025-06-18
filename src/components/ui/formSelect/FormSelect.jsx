@@ -7,13 +7,16 @@ const FormSelect = ({
   error,
   required = false,
   className = '',
+  customCss = '',     
+  inputProps = {},    
 }) => {
   return (
     <div className={`mb-4 ${className}`}>
       <select
         {...register(name, { required })}
+        {...inputProps}
         className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-400
-          ${error ? 'border-red-500' : 'border-gray-300'}`}
+          ${error ? 'border-red-500' : 'border-gray-300'} ${customCss}`}
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>

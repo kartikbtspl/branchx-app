@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 import FormLabel from "@/components/ui/formLabel/FormLabel";
 import FormInput from "@/components/ui/formInput/FormInput";
 import FormSelect from "@/components/ui/formSelect/FormSelect";
-import { CampaignFormfields as fields } from "./config/campaigFormFields";
+import { CampaignFormfields as fields } from "./config/campaignFormFields";
 
 const CampaignForm = () => {
   const {

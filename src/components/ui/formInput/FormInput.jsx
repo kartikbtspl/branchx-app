@@ -8,8 +8,9 @@ const FormInput = ({
   register,
   error,
   className = '',
-  inputProps = {},
-  ...rest
+  inputProps = {},        
+  customSx = {},          
+  ...rest                 
 }) => {
   return (
     <div className={`mb-4 ${className}`}>
@@ -33,20 +34,21 @@ const FormInput = ({
             backgroundColor: '#f9f9f9',
             borderRadius: '6px',
             '& fieldset': {
-              borderColor: error ? '#f44336' : '#cbd5e0', // red or gray-300
+              borderColor: error ? '#f44336' : '#cbd5e0',
             },
             '&:hover fieldset': {
-              borderColor: '#3b82f6', // Tailwind blue-500
+              borderColor: '#3b82f6',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#2563eb', // Tailwind blue-600
+              borderColor: '#2563eb',
             },
           },
           '& input': {
             padding: '10px 12px',
             fontSize: '14px',
-            color: '#1f2937', // Tailwind gray-800
+            color: '#1f2937',
           },
+          ...customSx, 
         }}
         {...rest}
       />

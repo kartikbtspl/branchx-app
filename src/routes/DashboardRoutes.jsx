@@ -13,6 +13,7 @@ import CampaignCard from "@/pages/campaigns/CampaignCard";
 import CampaignDetails from "@/pages/campaigns/CampaignDetails";
 import DistributorDashboard from "@/components/distributor/DistributorDashboard";
 import UserCampaigns from "@/pages/campaigns/UserCampaigns";
+import CampaignCreateForm from "../components/ui/formBuilder/CampaignCreateForm";
 
 export const dashboardRoutes = [
   <Route
@@ -31,6 +32,7 @@ export const dashboardRoutes = [
     <Route path="/campaigns" element={<CampaignCard />} />
     <Route path="/campaign/:id" element={<CampaignDetails />} />
     <Route path="/distributor" element={<DistributorDashboard />} />
+    <Route path="/dummy" element = {<CampaignCreateForm />} />
   </Route>,
 ];
 

@@ -45,7 +45,7 @@ const AdScheduling = () => {
       <h2 className="text-lg font-semibold mb-4">Ad Scheduling</h2>
 
       <div className="grid md:grid-cols-2 gap-6">
-        {/* Time Slot Dropdown */}
+      
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Time Slot(s)
@@ -104,7 +104,7 @@ const AdScheduling = () => {
           </label>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Controller
-              name="scheduleDate"
+              name="scheduleStartDate"
               control={control}
               defaultValue={null}
               rules={{

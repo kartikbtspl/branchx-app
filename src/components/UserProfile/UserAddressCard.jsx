@@ -2,7 +2,7 @@ import { useModal } from "../../hooks/useModal";
 import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
-import Label from "../form/Label";
+import FormLabel from "../ui/formLabel/FormLabel";
 
 export default function UserAddressCard() {
   const { isOpen, openModal, closeModal } = useModal();
@@ -96,22 +96,22 @@ export default function UserAddressCard() {
             <div className="px-2 overflow-y-auto custom-scrollbar">
               <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
                 <div>
-                  <Label>Country</Label>
+                  <FormLabel>Country</FormLabel>
                   <Input type="text" value="United States" />
                 </div>
 
                 <div>
-                  <Label>City/State</Label>
+                  <FormLabel>City/State</FormLabel>
                   <Input type="text" value="Arizona, United States." />
                 </div>
 
                 <div>
-                  <Label>Postal Code</Label>
+                  <FormLabel>Postal Code</FormLabel>
                   <Input type="text" value="ERT 2489" />
                 </div>
 
                 <div>
-                  <Label>TAX ID</Label>
+                  <FormLabel>TAX ID</FormLabel>
                   <Input type="text" value="AS4568384" />
                 </div>
               </div>

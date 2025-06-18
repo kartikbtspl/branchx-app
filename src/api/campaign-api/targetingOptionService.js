@@ -11,8 +11,10 @@ export const deviceTypes = async () => {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
+      withCredentials : true
     }
   );
+  console.log(deviceTypes)
   return deviceTypes?.data?.data;
 };
 
@@ -25,9 +27,11 @@ export const productTypes = async () => {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
+      withCredentials : true
     }
+    
   );
-
+  console.log(productTypes)
   return productTypes?.data?.data;
 };
 

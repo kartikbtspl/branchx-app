@@ -125,9 +125,9 @@ const TargetingOptions = () => {
   const estimatedPrice = watch("estimatedPrice");
 
   return (
-    <div className="grid grid-cols-2 gap-6 w-full">
+    <div className="w-full grid grid-cols-2 gap-6  ">
       {/* Target Regions */}
-      <div className="w-full">
+      <div className="w-full ">
         <FormLabel text="Target Regions" required />
         <Controller
           name="targetRegions"
@@ -138,6 +138,8 @@ const TargetingOptions = () => {
             <Autocomplete
               multiple
               fullWidth
+              className="w-full"
+              sx={{ width: 300 }}
               options={regionOptions}
               getOptionLabel={(option) => option.name}
               isOptionEqualToValue={(option, value) => option.id === value.id}
@@ -151,6 +153,7 @@ const TargetingOptions = () => {
                   helperText={errors.targetRegions?.message}
                   size="small"
                   fullWidth
+                  className="w-full"
                 />
               )}
             />
@@ -158,7 +161,6 @@ const TargetingOptions = () => {
         />
       </div>
 
-      {/* Product Type */}
       <div className="w-full">
         <FormLabel text="Product Type" required />
         <Controller
@@ -167,10 +169,12 @@ const TargetingOptions = () => {
           rules={{ required: "Please select a product type" }}
           render={({ field: { onChange, value } }) => (
             <Autocomplete
+            className="w-full"
               options={productTypeOptions}
               getOptionLabel={(option) => option.name}
               isOptionEqualToValue={(option, value) => option.name === value.name}
               value={value}
+              sx={{ width: 300 }}
               onChange={(event, newValue) => onChange(newValue)}
               fullWidth
               renderInput={(params) => (
@@ -200,7 +204,9 @@ const TargetingOptions = () => {
             <Autocomplete
               multiple
               fullWidth
+              sx={{ width: 300 }}
               options={adDeviceOptions}
+              className="w-full"
               getOptionLabel={(option) => option.name}
               isOptionEqualToValue={(option, value) => option.name === value.name}
               value={value}
@@ -229,7 +235,7 @@ const TargetingOptions = () => {
         />
       </div>
 
-      {/* Demographics */}
+      
       <div className="w-full">
         <FormLabel text="Demographics" />
         <select
@@ -245,7 +251,6 @@ const TargetingOptions = () => {
         </select>
       </div>
 
-      {/* Estimated Price */}
       {estimatedPrice && (
         <div className="col-span-2 mt-2 text-lg font-semibold text-green-600">
           Estimated Price: ₹ {estimatedPrice.toLocaleString()}

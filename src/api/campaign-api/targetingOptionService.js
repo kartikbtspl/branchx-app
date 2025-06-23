@@ -14,7 +14,7 @@ export const deviceTypes = async () => {
       withCredentials : true
     }
   );
-  console.log(deviceTypes)
+  
   return deviceTypes?.data?.data;
 };
 
@@ -31,7 +31,7 @@ export const productTypes = async () => {
     }
     
   );
-  console.log(productTypes)
+
   return productTypes?.data?.data;
 };
 
@@ -61,6 +61,6 @@ export const estimatePrice = async (data) => {
     },
     withCredentials: true,
   });
-  console.log("Estimated Price Response:", response.data);
+  console.log(response)
   return response.data;
 };

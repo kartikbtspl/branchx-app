@@ -1,5 +1,4 @@
-import React from 'react';
-import { TextField } from '@mui/material';
+import { TextField } from "@mui/material";
 
 const FormInput = ({
   name,
@@ -8,9 +7,12 @@ const FormInput = ({
   register,
   error,
   className = '',
-  inputProps = {},        
-  customSx = {},          
-  ...rest                 
+  inputProps = {},
+  customSx = {},
+  variant = 'outlined',
+  size = 'small',
+  readOnly = false, // ← add this
+  ...rest
 }) => {
   return (
     <div className={`mb-4 ${className}`}>
@@ -18,12 +20,15 @@ const FormInput = ({
         id={name}
         type={type}
         placeholder={placeholder}
-        variant="outlined"
-        size="small"
+        variant={variant}
+        size={size}
         fullWidth
         error={!!error}
         helperText={error?.message}
         {...register(name)}
+        InputProps={{
+          readOnly, // ← apply here
+        }}
         slotProps={{
           input: {
             ...inputProps,
@@ -31,7 +36,7 @@ const FormInput = ({
         }}
         sx={{
           '& .MuiOutlinedInput-root': {
-            backgroundColor: '#f9f9f9',
+            backgroundColor: readOnly ? '#f0fdf4' : '#f9f9f9', // highlight if readOnly
             borderRadius: '6px',
             '& fieldset': {
               borderColor: error ? '#f44336' : '#cbd5e0',
@@ -48,7 +53,7 @@ const FormInput = ({
             fontSize: '14px',
             color: '#1f2937',
           },
-          ...customSx, 
+          ...customSx,
         }}
         {...rest}
       />

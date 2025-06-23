@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Button from "../ui/button/Button";
 
 const CreateAd = () => {
   return (
@@ -8,7 +9,7 @@ const CreateAd = () => {
       </div>
       <div className="w-full flex justify-end">
         <Link to="/campaign/create-campaign">
-          <button className="bg-[#526e95] p-2 rounded-xl text-white">Create Campaign</button>
+          <Button className="bg-[#526e95] p-2 rounded-xl text-white">Create Campaign</Button>
         </Link>
       </div>
     </div>

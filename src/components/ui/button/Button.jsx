@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const sizeClasses = {
   sm: "px-4 py-3 text-sm",

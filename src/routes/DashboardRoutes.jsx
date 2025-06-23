@@ -1,6 +1,4 @@
-import {
-  Route
-} from "react-router-dom";
+import { Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 
 import AppLayout from "@/layout/AppLayout";
@@ -13,7 +11,10 @@ import CampaignCard from "@/pages/campaigns/CampaignCard";
 import CampaignDetails from "@/pages/campaigns/CampaignDetails";
 import DistributorDashboard from "@/components/distributor/DistributorDashboard";
 import UserCampaigns from "@/pages/campaigns/UserCampaigns";
-import CampaignCreateForm from "../components/ui/formBuilder/CampaignCreateForm";
+
+import CreateCampaignPage from "../pages/Forms/campaign-form/CreateCampaignPage";
+import EditCampaignPage from "../pages/Forms/campaign-form/EditCampaignPage";
+import CampaignFormWrapper from "../components/ui/formBuilder/CampaignFormWrapper";
 
 export const dashboardRoutes = [
   <Route
@@ -27,17 +28,12 @@ export const dashboardRoutes = [
     <Route index path="/" element={<Home />} />
     <Route path="/profile" element={<UserProfiles />} />
     <Route path="/blank" element={<Blank />} />
-    <Route path="/campaign/create-campaign" element={<Campaign />} />
+    <Route path="/campaign/create-campaign" element={<CreateCampaignPage />} />
+     <Route path="/campaign/edit/:id" element={<EditCampaignPage />} />
     <Route path="/created-campaigns" element={<UserCampaigns />} />
     <Route path="/campaigns" element={<CampaignCard />} />
     <Route path="/campaign/:id" element={<CampaignDetails />} />
     <Route path="/distributor" element={<DistributorDashboard />} />
-    <Route path="/dummy" element = {<CampaignCreateForm />} />
+    <Route key="dummy" path="/dummyForm" element={<CampaignFormWrapper />} />
   </Route>,
 ];
-
-
-
-
-
-

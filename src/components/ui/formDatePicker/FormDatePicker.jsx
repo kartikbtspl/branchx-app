@@ -9,6 +9,7 @@ const FormDatePicker = ({
   control,
   required = false,
   error,
+  validationMessage = 'This field is required',
   className = '',
   inputProps = {},    
   customSx = {},     
@@ -20,7 +21,7 @@ const FormDatePicker = ({
         <Controller
           name={name}
           control={control}
-          rules={{ required: required ? 'This field is required' : false }}
+          rules={{ required: required ? validationMessage : false }}
           render={({ field }) => (
             <DatePicker
               {...field}

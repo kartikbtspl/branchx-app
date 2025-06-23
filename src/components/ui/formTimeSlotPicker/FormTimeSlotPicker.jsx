@@ -16,13 +16,9 @@ const FormTimeSlotPicker = ({
   const { control } = useFormContext();
 
   return (
-    <Box className={customCss}>
-      <Typography variant="subtitle1" className="mb-2">
-        {label}
-      </Typography>
-
+    <Box className={`${customCss} `}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Box display="flex" gap={2}>
+        <Box display="flex" gap={2} >
           <Controller
             name={startName}
             control={control}

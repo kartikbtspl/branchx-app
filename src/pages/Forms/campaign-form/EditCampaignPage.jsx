@@ -9,7 +9,6 @@ const EditCampaignPage = () => {
   const dispatch = useDispatch();
 
    const { campaign, loading, error } = useSelector((state) => state.campaignDetail);
-    console.log(campaign)
   useEffect(() => {
     if (id) {
       dispatch(fetchCampaignById(id));

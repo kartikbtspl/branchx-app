@@ -11,8 +11,7 @@ import Loader from "../../components/loader/Loader";
 const UserCampaigns = () => {
   const dispatch = useDispatch();
   const { campaigns, loading } = useSelector((state) => state.campaign);
-  console.log("Campaigns data:", campaigns);
-  console.log("Loading state:", loading);
+  
 
   useEffect(() => {
     if (!campaigns || campaigns.length === 0) {
@@ -25,8 +24,7 @@ const UserCampaigns = () => {
   };
 
   const handleReconfigure = (id) => {
-    console.log("Reconfigure clicked for campaign ID:", id);
-    
+    //handle configurations here
   };
 
   if (loading) {

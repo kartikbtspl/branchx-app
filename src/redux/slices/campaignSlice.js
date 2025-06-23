@@ -28,7 +28,6 @@ export const fetchCampaigns = createAsyncThunk(
   "campaign/fetchCampaigns",
   async (_, { rejectWithValue }) => {
     try {
-        console.log("Fetching campaigns...");
       const response = await getCampaignsAPI();
     
         if (response.length === 0) {

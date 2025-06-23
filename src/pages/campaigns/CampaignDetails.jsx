@@ -26,8 +26,7 @@ const CampaignDetails = () => {
             },
           }
         );
-        console.log("Campaign data fetched successfully:", response);
-        setCampaign(response.data.data);
+        setCampaign(response?.data?.data);
       } catch (error) {
         console.error("Failed to fetch campaign:", error);
       }
@@ -43,9 +42,6 @@ const CampaignDetails = () => {
       return [];
     }
   };
-
-  const isActionTaken =
-    campaign?.isApproved === "APPROVE" || campaign?.isApproved === "REJECT";
 
   if (!campaign) {
     return (
@@ -191,12 +187,12 @@ const CampaignDetails = () => {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Time Slot</p>
-                  <p className="font-medium">{campaign.timeSlot}</p>
+                  <p className="font-medium">{campaign.startTime} {campaign.endTime}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Selected Days</p>
                   <p className="font-medium">
-                    {parseArray(campaign.selectedDays).join(", ") || "N/A"}
+                    {parseArray(campaign.daysOfWeek).join(", ") || "N/A"}
                   </p>
                 </div>
               </div>
@@ -268,13 +264,13 @@ const CampaignDetails = () => {
                 <div>
                   <p className="text-sm text-gray-500">Start Date</p>
                   <p className="font-medium">
-                    {formatDate(campaign.scheduleStartDate)}
+                    {formatDate(campaign.startDate)}
                   </p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">End Date</p>
                   <p className="font-medium">
-                    {formatDate(campaign.scheduleEndDate)}
+                    {formatDate(campaign.endDate)}
                   </p>
                 </div>
                 <div>

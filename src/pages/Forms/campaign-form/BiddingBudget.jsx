@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useForm, useFormContext, useWatch } from "react-hook-form";
 import { estimatePrice } from "../../../api/campaign-api/targetingOptionService";
 
 let debounceTimeout;
@@ -10,8 +10,9 @@ const BiddingBudget = () => {
     setValue,
     formState: { errors },
     control,
+    watch
   } = useFormContext();
-
+ 
   const targetRegions = useWatch({ control, name: "targetRegions" }) || [];
   const adDeviceShow = useWatch({ control, name: "adDeviceShow" }) || [];
   const productType = useWatch({ control, name: "productType" });
@@ -26,7 +27,7 @@ const BiddingBudget = () => {
         const response = await estimatePrice({
           targetRegions: targetRegions.map((r) => (r.name ? r.name : r)),
           adDevices: adDeviceShow.map((d) => (d.name ? d.name : d)),
-          productType: productType.name || productType,
+          productType: productType?.name || productType,
         });
 
         const cost = response?.data?.baseCost || 0;
@@ -39,9 +40,8 @@ const BiddingBudget = () => {
       } catch (err) {
         console.error("Failed to fetch estimated price:", err);
       }
-    }, 500); // Delay in ms (500ms debounce)
+    }, 500);
 
-    // Cleanup on unmount or next call
     return () => clearTimeout(debounceTimeout);
   }, [
     JSON.stringify(targetRegions),
@@ -52,25 +52,28 @@ const BiddingBudget = () => {
 
   return (
     <div className="w-full bg-white p-6 rounded-lg shadow-md">
-      <h1 className="text-lg font-semibold mb-4">Budget</h1>
+      <h1 className="text-lg font-semibold mb-4">Budget And Bid</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        {/* Base Cost */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Base Cost
           </label>
           <input
             type="number"
+            defaultValue={estimatePrice}
             {...register("baseCost", { required: "Base cost is required" })}
             className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-400"
           />
-          {errors.baseBid && (
+          {errors.baseCost && (
             <p className="text-red-500 text-sm mt-1">
-              {errors.baseBid.message}
+              {errors.baseCost.message}
             </p>
           )}
         </div>
 
+        {/* Estimated Price */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Estimated Price
@@ -80,10 +83,54 @@ const BiddingBudget = () => {
           </div>
           <input type="hidden" {...register("estimatedPrice")} />
         </div>
+
+        {/* Min Bid */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Min Bid
+          </label>
+          <input
+            type="number"
+            {...register("minBid", {
+              required: "Min bid is required",
+              min: {
+                value: 1,
+                message: "Min bid should be at least ₹1",
+              },
+            })}
+            className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-400"
+          />
+          {errors.minBid && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.minBid.message}
+            </p>
+          )}
+        </div>
+
+        {/* Max Bid */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Max Bid
+          </label>
+          <input
+            type="number"
+            {...register("maxBid", {
+              required: "Max bid is required",
+              validate: (value) =>
+                value >= Number(watch("minBid")) ||
+                "Max bid should be greater than or equal to Min bid",
+            })}
+            className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-400"
+          />
+          {errors.maxBid && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.maxBid.message}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
 export default BiddingBudget;
-

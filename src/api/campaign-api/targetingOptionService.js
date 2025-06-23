@@ -11,8 +11,10 @@ export const deviceTypes = async () => {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
+      withCredentials : true
     }
   );
+  
   return deviceTypes?.data?.data;
 };
 
@@ -25,7 +27,9 @@ export const productTypes = async () => {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
+      withCredentials : true
     }
+    
   );
 
   return productTypes?.data?.data;
@@ -57,6 +61,6 @@ export const estimatePrice = async (data) => {
     },
     withCredentials: true,
   });
-  console.log("Estimated Price Response:", response.data);
+  console.log(response)
   return response.data;
 };

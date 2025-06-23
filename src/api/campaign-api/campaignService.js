@@ -1,5 +1,5 @@
 import axiosInstance from "../../config/axiosConfig";
-
+const token = localStorage.getItem("token");
 export const createCampaignAPI = async (data) => {
   const formData = new FormData();
   Object.entries(data).forEach(([key, value]) => {
@@ -26,6 +26,7 @@ export const createCampaignAPI = async (data) => {
       formData.append(key, value.toString());
     }
   });
+  
   const token = localStorage.getItem("token");
   const response = await axiosInstance.post(
     "/api/v1/campaign/createCampaign",
@@ -41,7 +42,6 @@ export const createCampaignAPI = async (data) => {
 };
 
 export const getCampaignsAPI = async () => {
-  const token = localStorage.getItem("token");
   const response = await axiosInstance.get("api/v1/campaign/getUserCampaign", {
     withCredentials: true,
     headers: {
@@ -58,4 +58,20 @@ export const toggleCampaignStatusAPI = async (id, status) => {
     status,
   });
   return response.data;
+};
+
+export const getCampaignByIdAPI = async (id) => {
+  const response = await axiosInstance.get(
+    `/api/v1/campaign/${id}/getCampaign`,
+
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data.data;
 };

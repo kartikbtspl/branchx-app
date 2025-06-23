@@ -2,7 +2,6 @@ import { useModal } from "../../hooks/useModal";
 import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
-import Label from "../form/Label";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../redux/slices/userProfileSlice";
 import { useEffect } from "react";

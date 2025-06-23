@@ -62,11 +62,7 @@ const BiddingBudget = () => {
           </label>
           <input
             type="number"
-<<<<<<< HEAD
             defaultValue={estimatedPrice}
-=======
-            defaultValue={estimatePrice}
->>>>>>> b159280b6694d495837b8fc1a61e8ed53b094275
             {...register("baseCost", { required: "Base cost is required" })}
             className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-400"
           />

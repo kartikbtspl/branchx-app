@@ -31,7 +31,7 @@ const TargetingOptions = () => {
         const devices = await deviceTypes();
         const uniqueDevices = Array.from(
           new Map(devices.map((d) => [d.deviceType, d])).values()
-        ).map((d) => ({
+        )?.map((d) => ({
           name: d.deviceType,
           price: d.price,
           count: d.availableCount,
@@ -48,11 +48,13 @@ const TargetingOptions = () => {
     const fetchProductTypes = async () => {
       try {
         const products = await productTypes();
-        const formatted = products.map((p) => ({
+        const formatted = products?.map((p) => ({
           name: p.product_type,
           price: p.price,
         }));
         setProductTypeOptions(formatted);
+        console.log(formatted)
+     
       } catch (err) {
         console.error("Failed to fetch product types:", err);
       }
@@ -71,14 +73,14 @@ const TargetingOptions = () => {
             seen.add(r.city);
             return true;
           })
-          .map((region) => ({
+          ?.map((region) => ({
             id: `${region.city}-${region.price}`,
             name: region.city,
             price: region.price,
           }));
 
         setRegionOptions(formatted);
-        console.log(formatted)
+        
       } catch (err) {
         console.error("Failed to fetch target regions:", err);
       }

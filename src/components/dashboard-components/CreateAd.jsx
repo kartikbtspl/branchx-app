@@ -9,7 +9,7 @@ const CreateAd = () => {
       </div>
       <div className="w-full flex justify-end">
         <Link to="/campaign/create-campaign">
-          <Button className="p-2 rounded-xl text-white">Create Campaign</Button>
+          <Button className="bg-[#526e95] p-2 rounded-xl text-white">Create Campaign</Button>
         </Link>
       </div>
     </div>

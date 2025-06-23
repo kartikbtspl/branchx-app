@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Campaign from "../Forms/campaign-form/Campaign";
 import Loader from "../../components/loader/Loader";
-
+import Button from "../../components/ui/button/Button";
+import { Link } from "react-router-dom";
 const CampaignDetails = () => {
   const [campaign, setCampaign] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -12,10 +13,18 @@ const CampaignDetails = () => {
 
   useEffect(() => {
     const fetchCampaign = async () => {
+      const token = localStorage.getItem("token")
       try {
         const response = await axios.get(
-          `https://d1ef-203-192-220-137.ngrok-free.app/api/v1/campaign/${id}/getCampaign`,
-          { withCredentials: true }
+          `https://branchx-backend-api-4.onrender.com/api/v1/campaign/${id}/getCampaign`,
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         console.log("Campaign data fetched successfully:", response);
         setCampaign(response.data.data);
@@ -35,37 +44,17 @@ const CampaignDetails = () => {
     }
   };
 
-  const handleApproval = async (status) => {
-    setLoading(true);
-    setActionStatus("");
-    try {
-      const response = await axios.put(
-        `http://192.168.1.36:3001/api/v1/campaigns/${id}/campaignApproval`,
-        { isApproved: status },
-        { withCredentials: true }
-      );
-      setActionStatus(`Campaign ${status.toLowerCase()}d successfully!`);
-      setCampaign((prev) => ({ ...prev, isApproved: status }));
-    } catch (error) {
-      console.error("Action failed:", error);
-      setActionStatus("Failed to update approval status.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const isActionTaken =
     campaign?.isApproved === "APPROVE" || campaign?.isApproved === "REJECT";
 
   if (!campaign) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-      <Loader />
+        <Loader />
       </div>
     );
   }
 
-  // Helper function to format currency
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
@@ -74,7 +63,6 @@ const CampaignDetails = () => {
     }).format(amount);
   };
 
-  // Helper function to format date
   const formatDate = (dateString) => {
     const options = {
       year: "numeric",
@@ -86,7 +74,6 @@ const CampaignDetails = () => {
     return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
-  // Get status badge color
   const getStatusColor = (status) => {
     switch (status) {
       case "APPROVE":
@@ -112,7 +99,7 @@ const CampaignDetails = () => {
             {campaign.campaignDescription}
           </p>
         </div>
-        <div className="mt-4 md:mt-0">
+        <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-start md:items-center gap-3">
           <span
             className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
               campaign.isApproved
@@ -120,6 +107,21 @@ const CampaignDetails = () => {
           >
             {campaign.isApproved}
           </span>
+
+          <div className="flex gap-2">
+            <Link to={`/campaign/edit/${campaign.id}`}>
+              <Button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md">
+                Update
+              </Button>
+            </Link>
+
+            <Button
+              onClick={() => console.log("Delete clicked")}
+              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md"
+            >
+              Delete
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -141,8 +143,7 @@ const CampaignDetails = () => {
           <div className="lg:col-span-2 space-y-6">
             {/* Campaign Info */}
             <div className="border border-gray-200 rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                {/* Removed SVG */}
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Campaign Information
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -161,12 +162,10 @@ const CampaignDetails = () => {
                 <div>
                   <p className="text-sm text-gray-500">Device</p>
                   <p className="font-medium">
-                    {campaign.Devices?.map((device) => device.deviceType).join(
-                      ", "
-                    ) || "N/A"}
+                    {campaign.Devices?.map((d) => d.deviceType).join(", ") ||
+                      "N/A"}
                   </p>
                 </div>
-
                 <div>
                   <p className="text-sm text-gray-500">Duration</p>
                   <p className="font-medium">{campaign.duration} seconds</p>
@@ -176,8 +175,7 @@ const CampaignDetails = () => {
 
             {/* Targeting */}
             <div className="border border-gray-200 rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                {/* Removed SVG */}
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Targeting Information
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -188,12 +186,9 @@ const CampaignDetails = () => {
                 <div>
                   <p className="text-sm text-gray-500">Regions</p>
                   <p className="font-medium">
-                    {campaign.Locations?.map((location) => location.city).join(
-                      ", "
-                    ) || "N/A"}
+                    {campaign.Locations?.map((l) => l.city).join(", ") || "N/A"}
                   </p>
                 </div>
-
                 <div>
                   <p className="text-sm text-gray-500">Time Slot</p>
                   <p className="font-medium">{campaign.timeSlot}</p>
@@ -207,22 +202,34 @@ const CampaignDetails = () => {
               </div>
             </div>
 
+            {/* Budget */}
             <div className="border border-gray-200 rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Budget
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <p className="text-sm text-blue-600">Base cost</p>
                   <p className="text-xl font-bold">
-                    {formatCurrency(campaign.baseBid)}
+                    {formatCurrency(campaign.baseCost)}
                   </p>
                 </div>
-                {/* Removed Max Bid Cap */}
                 <div className="bg-purple-50 p-4 rounded-lg">
                   <p className="text-sm text-purple-600">Estimated cost</p>
                   <p className="text-xl font-bold">
-                    {formatCurrency(campaign.budgetLimit)}
+                    {formatCurrency(campaign.baseCost)}
+                  </p>
+                </div>
+                <div className="bg-purple-50 p-4 rounded-lg">
+                  <p className="text-sm text-purple-600">Max bid cost</p>
+                  <p className="text-xl font-bold">
+                    {formatCurrency(campaign.maxBid)}
+                  </p>
+                </div>
+                <div className="bg-purple-50 p-4 rounded-lg">
+                  <p className="text-sm text-purple-600">Min bid cost</p>
+                  <p className="text-xl font-bold">
+                    {formatCurrency(campaign.minBid)}
                   </p>
                 </div>
               </div>
@@ -230,11 +237,9 @@ const CampaignDetails = () => {
 
             {/* Creative Preview */}
             <div className="border border-gray-200 rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                {/* Removed SVG */}
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Creative Preview
               </h2>
-
               <div className="mt-4 flex justify-center">
                 {campaign.creativeFile?.match(/\.(jpeg|jpg|gif|png|webp)$/i) ? (
                   <img
@@ -253,19 +258,17 @@ const CampaignDetails = () => {
             </div>
           </div>
 
-          {/* Right Column - Timeline & Actions */}
+          {/* Right Column - Timeline & Status */}
           <div className="space-y-6">
-            {/* Timeline */}
             <div className="border border-gray-200 rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                {/* Removed SVG */}
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Campaign Timeline
               </h2>
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-gray-500">Start Date</p>
                   <p className="font-medium">
-                    {formatDate(campaign.scheduleDate)}
+                    {formatDate(campaign.scheduleStartDate)}
                   </p>
                 </div>
                 <div>
@@ -281,10 +284,8 @@ const CampaignDetails = () => {
               </div>
             </div>
 
-            {/* Status */}
             <div className="border border-gray-200 rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                {/* Removed SVG */}
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Campaign Status
               </h2>
               <div className="space-y-4">

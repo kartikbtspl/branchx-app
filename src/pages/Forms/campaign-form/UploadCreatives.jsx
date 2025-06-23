@@ -70,15 +70,7 @@ const UploadCreatives = () => {
             />
             {!previewURL ? (
               <div className="flex flex-col items-center text-center px-4">
-                <svg
-                  className="w-8 h-8 text-blue-500 mb-2"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 12V4m0 0l-3.5 3.5M12 4l3.5 3.5" />
-                </svg>
+                
                 <p className="text-sm text-gray-600">
                   Drag & Drop or Click to Upload File
                 </p>

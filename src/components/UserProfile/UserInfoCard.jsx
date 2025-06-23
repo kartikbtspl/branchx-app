@@ -6,6 +6,7 @@ import Label from "../form/Label";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../redux/slices/userProfileSlice";
 import { useEffect } from "react";
+import FormLabel from "../ui/formLabel/FormLabel";
 
 export default function UserInfoCard() {
   const { isOpen, openModal, closeModal } = useModal();
@@ -153,27 +154,27 @@ export default function UserInfoCard() {
 
                 <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
                   <div className="col-span-2 lg:col-span-1">
-                    <Label>First Name</Label>
+                    <FormLabel>First Name</FormLabel>
                     <Input type="text" value="Musharof" />
                   </div>
 
                   <div className="col-span-2 lg:col-span-1">
-                    <Label>Last Name</Label>
+                    <FormLabel>Last Name</FormLabel>
                     <Input type="text" value="Chowdhury" />
                   </div>
 
                   <div className="col-span-2 lg:col-span-1">
-                    <Label>Email Address</Label>
+                    <FormLabel>Email Address</FormLabel>
                     <Input type="text" value="randomuser@pimjo.com" />
                   </div>
 
                   <div className="col-span-2 lg:col-span-1">
-                    <Label>Phone</Label>
+                    <FormLabel>Phone</FormLabel>
                     <Input type="text" value="+09 363 398 46" />
                   </div>
 
                   <div className="col-span-2">
-                    <Label>Bio</Label>
+                    <FormLabel>Bio</FormLabel>
                     <Input type="text" value="Team Manager" />
                   </div>
                 </div>

@@ -19,17 +19,20 @@ const Button = ({
   endIcon,
   onClick = () => {},
   className = "",
+  customCss = "",   
   disabled = false,
+  inputProps = {},  
 }) => {
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 rounded-lg transition ${className} ${
-        sizeClasses[size]
-      } ${variantClasses[variant]} ${
+      className={`inline-flex items-center justify-center gap-2 rounded-lg transition ${
+        className
+      } ${customCss} ${sizeClasses[size]} ${variantClasses[variant]} ${
         disabled ? "cursor-not-allowed opacity-50" : ""
       }`}
       onClick={onClick}
       disabled={disabled}
+      {...inputProps}   
     >
       {startIcon && <span className="flex items-center">{startIcon}</span>}
       {children}

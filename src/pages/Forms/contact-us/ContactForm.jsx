@@ -41,11 +41,13 @@ const SignInForm = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      await axios.post(
-        "https://branchx-backend-api-4.onrender.com/api/v1/user/createUser",
+      const res = await axios.post(
+        "https://branchx-backend-api-4.onrender.com/api/v1/users/createUser",
         data,
         { withCredentials: true }
       );
+      console.log(res);
+      
       toast.success("Form submitted successfully!");
       reset();
       navigate("/signin");

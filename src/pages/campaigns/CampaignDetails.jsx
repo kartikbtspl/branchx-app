@@ -14,7 +14,7 @@ const CampaignDetails = () => {
     const fetchCampaign = async () => {
       try {
         const response = await axios.get(
-          `https://branchx-backend-api-4.onrender.com/api/v1/campaign/${id}/getCampaign`,
+          `https://d1ef-203-192-220-137.ngrok-free.app/api/v1/campaign/${id}/getCampaign`,
           { withCredentials: true }
         );
         console.log("Campaign data fetched successfully:", response);

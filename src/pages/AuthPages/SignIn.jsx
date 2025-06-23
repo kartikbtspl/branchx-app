@@ -100,7 +100,7 @@ const SignIn = () => {
       <div className="flex flex-col w-[65%] justify-center items-center px-8 py-12">
         <img src="/images/logo/bx-logo.svg" alt="Xpandifi Logo" className="h-12 mb-4" />
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-          Welcome To Ad-Monetization Platform
+          Xpandifi Influence
         </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}

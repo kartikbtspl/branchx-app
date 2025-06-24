@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCampaignByIdAPI, updateUserCamapign } from "../../api/campaign-api/campaignService";
+import { getCampaignByIdAPI, updateUserCampaign } from "../../api/campaign-api/campaignService";
 export const fetchCampaignById = createAsyncThunk(
   'campaign/fetchById',
   async (id, { rejectWithValue }) => {
@@ -15,7 +15,7 @@ export const updateCampaign = createAsyncThunk(
   'campaign/update',
   async ({ id, data }, { rejectWithValue }) => {
     try {
-      const response = await updateUserCamapign(id , data);
+      const response = await updateUserCampaign(id , data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || 'Failed to update campaign');

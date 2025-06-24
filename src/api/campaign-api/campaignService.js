@@ -76,7 +76,8 @@ export const getCampaignByIdAPI = async (id) => {
   return response?.data?.data;
 };
 
-export const updateUserCamapign = async (id , data) =>  {
+export const updateUserCampaign = async (id , data) =>  {
+  console.log(data)
 
   const response = await axiosInstance.put(`api/v1/campaign/${id}/updateCampaign` , data ,
     {

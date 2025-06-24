@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCampaignByIdAPI } from "../../api/campaign-api/campaignService";
+import { getCampaignByIdAPI, updateUserCampaign } from "../../api/campaign-api/campaignService";
 export const fetchCampaignById = createAsyncThunk(
   'campaign/fetchById',
   async (id, { rejectWithValue }) => {
@@ -8,6 +8,17 @@ export const fetchCampaignById = createAsyncThunk(
       return response;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || 'Something went wrong');
+    }
+  }
+);
+export const updateCampaign = createAsyncThunk(
+  'campaign/update',
+  async ({ id, data }, { rejectWithValue }) => {
+    try {
+      const response = await updateUserCampaign(id , data);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || 'Failed to update campaign');
     }
   }
 );
@@ -37,6 +48,19 @@ const campaignDetailSlice = createSlice({
         state.campaign = action.payload;
       })
       .addCase(fetchCampaignById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(updateCampaign.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateCampaign.fulfilled, (state, action) => {
+        state.loading = false;
+        state.campaign = action.payload; // update the state with new campaign data
+      })
+      .addCase(updateCampaign.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

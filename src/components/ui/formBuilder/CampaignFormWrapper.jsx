@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import InnerForm from "./InnerForm";
 import { createCampaign } from "../../../redux/slices/campaignSlice";
+import { updateCampaign } from "../../../redux/slices/campaignDetailSlice";
 
 const CampaignFormWrapper = ({ campaignData = {}, isEdit = false }) => {
   const methods = useForm({
@@ -17,19 +18,25 @@ const CampaignFormWrapper = ({ campaignData = {}, isEdit = false }) => {
   const { id } = useParams(); 
   const { loading } = useSelector((state) => state.campaign);
 
-  // Reset form with prefilled values on edit
   useEffect(() => {
     if (isEdit && campaignData) {
-      reset(campaignData);
+      const parsedData = {
+        ...campaignData,
+        daysOfWeek:
+          typeof campaignData.daysOfWeek === "string"
+            ? JSON.parse(campaignData.daysOfWeek || "[]")
+            : campaignData.daysOfWeek || [],
+      };
+
+      reset(parsedData);
     }
   }, [isEdit, campaignData, reset]);
 
   const onSubmit = async (formData) => {
     try {
       let result;
-      console.log(formData)
       if (isEdit) {
-        // result = await dispatch(updateCampaign({ id, data: formData }));
+        result = await dispatch(updateCampaign({ id, data: formData }));
       } else {
         
         result = await dispatch(createCampaign(formData));
@@ -37,7 +44,7 @@ const CampaignFormWrapper = ({ campaignData = {}, isEdit = false }) => {
 
       if (
         (!isEdit && createCampaign.fulfilled.match(result)) 
-        // || (isEdit && updateCampaign.fulfilled.match(result))
+        || (isEdit && updateCampaign.fulfilled.match(result))
       ) {
         reset();
         navigate("/"); 

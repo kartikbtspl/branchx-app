@@ -38,7 +38,7 @@ export const createCampaignAPI = async (data) => {
       },
     }
   );
-  return response.data;
+  return response?.data;
 };
 
 export const getCampaignsAPI = async () => {
@@ -50,7 +50,7 @@ export const getCampaignsAPI = async () => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data;
+  return response?.data;
 };
 
 export const toggleCampaignStatusAPI = async (id, status) => {
@@ -73,5 +73,22 @@ export const getCampaignByIdAPI = async (id) => {
       },
     }
   );
-  return response.data.data;
+  return response?.data?.data;
 };
+
+export const updateUserCampaign = async (id , data) =>  {
+  console.log(data)
+
+  const response = await axiosInstance.put(`api/v1/campaign/${id}/updateCampaign` , data ,
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+  return response?.data;
+
+}

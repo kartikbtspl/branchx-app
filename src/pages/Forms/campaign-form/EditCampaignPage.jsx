@@ -6,6 +6,7 @@ import {
   fetchCampaignById,
   clearCampaign,
 } from "../../../redux/slices/campaignDetailSlice";
+import { transformCampaignResponse } from "../../../utils/campaign-helper/transformCampaignResponse";
 
 const EditCampaignPage = () => {
   const { id } = useParams();
@@ -27,8 +28,9 @@ const EditCampaignPage = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading campaign: {error}</div>;
   if (!campaign) return null;
+  const transformed = transformCampaignResponse(campaign);
 
-  return <CampaignFormWrapper campaignData={campaign} isEdit={true} />;
+  return <CampaignFormWrapper campaignData={transformed} isEdit={true} />;
 };
 
 export default EditCampaignPage;
